@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./images/home.png">
+    <meta name="keywords" content="zxl20070701 1904314465@qq.com 个人主页 数学及相关衍生物 捐款支持我们">
+    <link rel="stylesheet" href="../styles/normalize.css">
+    <link rel="stylesheet" href="./styles/common.css">
+    <link rel="stylesheet" href="./styles/home.css">
+    <script src="./scripts/tool.js"></script>
+    <script src="./scripts/zh-tw.js"></script>
+    <script src="./scripts/shader.js"></script>
+    <script src="./scripts/formula.js"></script>
+    <script src="./scripts/home.js"></script>
+    <title>【个人主页】一起来学习吧~ </title>
+</head>
+
+<body onload="initMenu();">
+
+    <!-- 进度 -->
+    <div id="process"></div>
+
+    <!-- 主体内容 -->
+    <div class="body" id="body">
+        <nav>
+            <a href="javascript:void(0)" class="active">
+                首页
+            </a>
+            <a href="./index.html">
+                文档笔记
+            </a>
+            <a href="../toolbox/index.html" target="_blank">
+                实用工具
+            </a>
+            <a href="https://github.com/oi-contrib" target="_blank">
+                OI开源
+            </a>
+            <a href="https://github.com/zxl20070701" target="_blank">
+                更多
+            </a>
+        </nav>
+
+        <ul class="sponsors">
+            <li class="zfb"></li>
+            <li class="wx"></li>
+        </ul>
+
+        <div class="view">
+            <h2>
+                <a target="_blank" href="https://github.com/zxl20070701"></a>
+                一起来学习吧~
+                <form onsubmit="doSearch(event)">
+                    <input placeholder="输入内容后回车查询" type="text" id="search-input" spellcheck="false" autocomplete="off"
+                        onkeydown="doSearch">
+                </form>
+            </h2>
+
+            <div class="containter">
+                <div class="dream"></div>
+                <div class="content">
+
+                    <!-- todo:等“数学及相关衍生物”积累的差不多了，再在这里进行备份，目前先空着～ -->
+
+                </div>
+
+                <!-- 右侧内容 -->
+                <div class="right">
+                    <h2>
+                        推荐项目
+                    </h2>
+                    <ul>
+                        <li class="vislite">
+                            <div class="content">
+                                <h3>
+                                    VISLite
+                                </h3>
+                                数据可视化交互式跨端前端库
+                            </div>
+                            <div class="link">
+                                <a href="https://oi-contrib.github.io/VISLite" target="_blank">文档</a>
+                                <a href="https://github.com/oi-contrib/VISLite" target="_blank">源码</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="cat">
+                        <button tag="miss-cat" name="dialog-btn">《由老猫的离世而引发的追忆》</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <footer>
+            Copyright © 2007-2024
+            <a href="https://github.com/zxl20070701" target="_blank">zxl20070701 走一步，再走一步。</a>
+            All rights reserved.
+            <br />
+            本网站由“z Z ...”设计、开发和维护
+        </footer>
+    </div>
+
+    <!-- 期刊内容 -->
+    <div id="journals-content-id" class="journals-content">
+        <div class="close" id="journals-content-close-id" title="关闭">+</div>
+        <div id="journals-content-view-id" class="doc item"></div>
+    </div>
+
+    <script>
+        function doSearch(event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            var inputValueOrl = document.getElementById("search-input").value;
+            window.location.href = "./index.html#/?search=" + inputValueOrl;
+        }
+    </script>
+
+    <!-- 控制台打印 -->
+    <script>
+        console.log("%c\n\n\t\t学习的目的绝对不只是为了追求名誉或财富，而是为了在短暂的生命里给灵魂一个栖息的地方，同时寻着一个生存之道。\n\n %cby zxl20070701\n\n", "color:#555555;font-size:12px;font-family:cursive;", "color:gray;padding-left:60px;");
+    </script>
+
+</body>
+
+</html>

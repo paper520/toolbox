@@ -1,0 +1,60 @@
+<!-- 桌面 -->
+<div class="desktop">
+
+    <!-- 常用应用 -->
+    <ul class="application" ref="desktopApplication">
+        <li tag="regexper-visualization" ui-on:click="goto">
+            正则表达式可视化
+        </li>
+        <li tag="echarts" ui-on:click="goto">
+            可视化图表
+        </li>
+        <li tag="recorder-screen" ui-on:click="goto">
+            录屏软件
+        </li>
+        <li tag="scss" ui-on:click="goto">
+            scss转css
+        </li>
+        <li tag="format-json" ui-on:click="goto">
+            格式化JSON字符串
+        </li>
+        <li tag="video-play" ui-on:click="goto">
+            视频播放器
+        </li>
+    </ul>
+
+</div>
+
+<!-- 底部导航 -->
+<div class="taskline">
+    <ul>
+        <li tag="file-manager" ui-on:click="goto">
+            资源管理器
+        </li>
+        <li tag="browser" ui-on:click="goto">
+            浏览器
+        </li>
+        <li tag="notepad" ui-on:click="goto">
+            记事本
+        </li>
+        <li tag="setting" ui-on:click="goto">
+            设置
+        </li>
+    </ul>
+</div>
+
+<!-- 手势控制 -->
+<div class="handler">
+    <div class="drap" ui-dragdrop ui-bind:active="view?'no':'yes'" ui-on:click.stop="toggleView"></div>
+
+    <!-- 悬浮框 -->
+    <div class="view" ui-bind:active="view?'yes':'no'" ui-on:click.stop="toggleView">
+        <div>
+            <span tag="debugger" ui-on:click="openDialog">调试工具</span>
+            <span tag="what" ui-on:click="openDialog">说明</span>
+        </div>
+    </div>
+</div>
+
+<!-- 类似电脑桌面底部，这里默认隐藏，切换应用的时候辅助卡片效果底部显示 -->
+<span id="wins-line-id"></span>

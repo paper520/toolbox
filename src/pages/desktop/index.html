@@ -1,0 +1,51 @@
+<ul class="content" ui-right-menu:system ui-on:click="doSelect" tag="">
+    <li ui-bind:select="select=='computer'?'yes':'no'" ui-on:click.stop="doSelect" title="包含所有应用的地方" tag="computer"
+        ui-on:dblclick="goto" ui-right-menu:app>
+        我的电脑
+    </li>
+    <li class="link" ui-bind:select="select=='recorder-screen'?'yes':'no'" ui-on:click.stop="doSelect"
+        title="一个H5版本的电脑屏幕录制软件" tag="recorder-screen" ui-on:dblclick="goto" ui-right-menu:app>
+        录屏软件
+    </li>
+    <li class="link" ui-bind:select="select=='image-editor'?'yes':'no'" ui-on:click.stop="doSelect"
+        title="可以对图片进行编辑，包括合并、修改大小、美化等" tag="image-editor" ui-on:dblclick="goto" ui-right-menu:app>
+        图片编辑器
+    </li>
+    <li class="link" ui-bind:select="select=='code-editor'?'yes':'no'" ui-on:click.stop="doSelect"
+        title="支持图片、代码等查看和编辑，支持文件或目录打开、编辑、新建和保存" tag="code-editor" ui-on:dblclick="goto" ui-right-menu:app>
+        代码编辑器
+    </li>
+    <li class="link" ui-bind:select="select=='snake-eating'?'yes':'no'" ui-on:click.stop="doSelect" title="一个经典的贪吃蛇小游戏"
+        tag="snake-eating" ui-on:dblclick="goto" ui-right-menu:app>
+        贪吃蛇
+    </li>
+    <li class="link" ui-bind:select="select=='snipping-tool'?'yes':'no'" ui-on:click.stop="doSelect" title="一个H5版本的截图工具"
+        tag="snipping-tool" ui-on:dblclick="goto" ui-right-menu:app>
+        截图工具
+    </li>
+    <li class="link" ui-bind:select="select=='regexper-visualization'?'yes':'no'" ui-on:click.stop="doSelect"
+        title="输入一个正则表达式后可以把其变成可视化的图表来快速读懂意义" tag="regexper-visualization" ui-on:dblclick="goto" ui-right-menu:app>
+        正则表达式可视化
+    </li>
+    <li class="link" ui-bind:select="select=='geo-json'?'yes':'no'" ui-on:click.stop="doSelect"
+        title="主要用于快速了解一份geoJSON地理数据的内容" tag="geo-json" ui-on:dblclick="goto" ui-right-menu:app>
+        geoJSON查看器
+    </li>
+    <li class="link" ui-bind:select="select=='type-practice'?'yes':'no'" ui-on:click.stop="doSelect" title="一个打字练习软件"
+        tag="type-practice" ui-on:dblclick="goto" ui-right-menu:app>
+        金山打字通
+    </li>
+    <li class="link" ui-bind:select="select=='audio-editor'?'yes':'no'" ui-on:click.stop="doSelect"
+        title="可以对音频文件进行切割、合并等操作，支持多种格式" tag="audio-editor" ui-on:dblclick="goto" ui-right-menu:app>
+        音频编辑器
+    </li>
+</ul>
+<div class="taskline" ui-right-menu:desktop-line>
+    <span class="begin" title="快速开始" tag="begin" ui-on:click.stop="toggleWin"></span>
+    <span class="what" tag="what" ui-on:click="openDialog"></span>
+    <span class="wins" id="wins-line-id"></span>
+    <span class="time" tag="tools" ui-on:click.stop="toggleWin">
+        <div ui-bind="time"></div>
+        <div ui-bind="date"></div>
+    </span>
+</div>

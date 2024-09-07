@@ -1,0 +1,126 @@
+#!/usr/bin/env node
+
+'use strict';
+
+process.title = 'pkg-builder';
+process.env.NODE_ENV = 'production';
+
+const fs = require('fs');
+
+const { error, log } = require('../nodejs/log');
+const { fullPath } = require('../nodejs/path');
+const analyseBundle = require('./pkg/analyseBundle');
+
+const { simpleUrl } = require('./tool');
+
+// 获取命令行参数
+const parsed = require('../nodejs/option')({}, process.argv);
+
+// 获取配置文件
+let config = require('./config')(parsed.config[0]);
+
+const globalScript = require('./global')(config);
+
+let targetFolder = fullPath(config.output.folder, process.cwd());
+
+error(`Package Program
+-------------------------------------------------------------------------
+( Crafted in China By zxl20070701. )
+`);
+
+// 打包后文件的地址
+global._output = fullPath(config.output.entry, fullPath(config.output.folder, process.cwd()));
+
+// 需要分析的独立bundle文件
+// 除了入口文件外，比如遇到 ()=>import() 这样的懒加载语句也会扩充下面的语句
+let needAnalyseFiles = [{
+    source: fullPath(config.entry, process.cwd()),
+    target: global._output
+}];
+
+// 复制入口文件和初始化
+let template = fs.readFileSync(fullPath('./src/index.html', process.cwd()));
+fs.writeFileSync(fullPath('index.html', targetFolder), (template + "").replace('<!-- built files will be auto injected -->', globalScript + '<script defer="defer" src="' + config.output.entry + '"></script>') + `
+
+<!-- 禁止 debugger -->
+<script>
+(function () {
+
+    try {
+
+        // 定时运行调试
+        setInterval(function () {
+
+            // 替换 debugger 语句
+            // 是为了防止手动去除debugger
+            // 比如在此处右键点击 "Nerver pause here" 去掉这里调试
+            // Function 构造器生成的 debugger 会在每一次执行时开启一个临时 js 文件
+            // 语法: new Function ([arg1[, arg2[, ...argN]],] functionBody)
+            new Function("debugger")();
+            // debugger;
+
+        }, 50);
+
+    } catch (err) {
+        console.log("[调试工具错误]", err);
+    }
+
+})();
+</script>
+
+<!-- 安装应用 -->
+<script>
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./ServiceWorker.js', { scope: window.location.origin + window.location.pathname })
+            .then(function (registration) {
+
+                // 注册成功
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            })
+            .catch(function (err) {
+
+                // 注册失败:(
+                console.log('ServiceWorker registration failed: ', err);
+            });
+    });
+}
+</script>`);
+fs.mkdirSync(fullPath("../", global._output));
+
+global._isEntry = true;// 是否是编译入口文件
+global._rootBundle = [];// 记录入口根文件已经解析的依赖文件
+global._lazyBundle = [];// 记录已经生成的lazy包
+global._currentBundle = [];// 记录当前文件已经解析的依赖文件（每次解析新的 needAnalyseFile 需要重置）
+
+while (needAnalyseFiles.length > 0) {
+    let needAnalyseFile = needAnalyseFiles.shift();
+    global._currentBundle = [];
+
+    let bundleCode = "";
+
+    // 如果是根bundle，需要搭载基本的方法
+    if (global._isEntry) {
+        bundleCode = fs.readFileSync(fullPath('./pkg/static.js', __dirname), 'utf-8');
+        bundleCode = "/******/\n" + bundleCode.replace(/^/mg, '/******/  ') + "\n/************************************************************************/\n/******/\n";
+    }
+
+    log(`\nIndependent bundle file currently analyzed:
+    ● ${simpleUrl(needAnalyseFile.source)} → ${simpleUrl(needAnalyseFile.target)}
+`);
+
+    // 分析出当前bundle文件
+    let bundle = analyseBundle(needAnalyseFile.source, config);
+    bundleCode += bundle.code;
+    for (let lazyBundleFile of bundle.lazy) { needAnalyseFiles.push(lazyBundleFile); }
+
+    // 整个程序由主bundle启动
+    if (global._isEntry) bundleCode += `\nwindow.__pkg__bundleSrc__['0']();`;
+
+    fs.writeFileSync(needAnalyseFile.target, bundleCode);
+    global._isEntry = false;
+}
+
+error(`
+Package succeeded!
+`);
