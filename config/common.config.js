@@ -1,7 +1,6 @@
 const scssLoader = require('../bin/loader/scss');
 const styleLoader = require('../bin/loader/style');
 const templateLoader = require("../bin/loader/template");
-const pkg = require('../package.json');
 
 module.exports = {
 

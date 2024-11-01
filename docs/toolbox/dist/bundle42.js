@@ -1,30 +1,123 @@
 
 /*************************** [bundle] ****************************/
-// Original file:./src/dialogs/api/pages/framework/index.js
+// Original file:./src/mobile/recorder-screen/index.js
 /*****************************************************************/
-window.__pkg__bundleSrc__['111']=function(){
+window.__pkg__bundleSrc__['98']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('336');
+    __pkg__scope_args__=window.__pkg__getBundle('347');
 var template =__pkg__scope_args__.default;
+
+__pkg__scope_args__=window.__pkg__getBundle('348');
 
 
 __pkg__scope_bundle__.default= function (obj) {
+    var mediaRecorder;
+
     return {
-        render: template
-    }
+        name: "recorder-screen",
+        render: template,
+        data: {
+            isRun: obj.ref(false)
+        },
+        beforeFocus: function () {
+            document.getElementsByTagName('title')[0].innerText = "录屏软件" + window.systeName;
+            document.getElementById('icon-logo').setAttribute('href', './recorder-screen.png');
+        },
+        methods: {
+
+            // 开始录制
+            startRecorder: function () {
+                var _this = this;
+
+                if (!this.isRun) {
+                    var videoEl = this._refs.video.value;
+
+                    // 静音播放
+                    videoEl.muted = true;
+
+                    // 获取屏幕内容
+                    navigator.mediaDevices.getDisplayMedia({
+                        video: true,
+                        audio: true
+                    }).then(function (stream) {
+                        _this.isRun = true;
+
+                        // 视频流及时播放
+                        videoEl.srcObject = stream;
+                        videoEl.onloadedmetadata = function () {
+                            videoEl.play();
+                        };
+
+                        // 创建一个对指定的 MediaStream 进行录制的 MediaRecorder 对象
+                        mediaRecorder = new MediaRecorder(stream, {
+                            mimeType: MediaRecorder.isTypeSupported("video/webm; codecs=vp9") ? "video/webm; codecs=vp9" : "video/webm"
+                        });
+
+                        // 录制
+                        var chunks = [];
+                        mediaRecorder.addEventListener("dataavailable", function (event) {
+                            chunks.push(event.data);
+                        });
+
+                        stream.getVideoTracks()[0].onended = function () {
+                            mediaRecorder.stop();
+                        };
+
+                        // 停止的时候下载
+                        mediaRecorder.addEventListener("stop", function () {
+                            var blob = new Blob(chunks, {
+                                type: chunks[0].type
+                            });
+                            var url = URL.createObjectURL(blob);
+                            var downEl = document.createElement("a");
+                            downEl.href = url;
+                            downEl.download = "屏幕录制.webm";
+                            downEl.click();
+                            _this.isRun = false;
+                            mediaRecorder = null;
+                        });
+
+                        // 启动
+                        mediaRecorder.start();
+
+                    }).catch(function (event) {
+                        alert("取消录制或遇到错误\n\n" + event);
+                    });
+
+                } else {
+                    alert("正在录制中，请点击‘完成’按钮结束后再启动新的录制程序！");
+                }
+
+            }
+        }
+    };
 };
 
     return __pkg__scope_bundle__;
 }
 
 /*************************** [bundle] ****************************/
-// Original file:./src/dialogs/api/pages/framework/index.html
+// Original file:./src/mobile/recorder-screen/index.html
 /*****************************************************************/
-window.__pkg__bundleSrc__['336']=function(){
+window.__pkg__bundleSrc__['347']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_bundle__.default= [{"type":"tag","name":"root","attrs":{},"childNodes":[1,3,5,7,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60]},{"type":"tag","name":"header","attrs":{},"childNodes":[2]},{"type":"text","content":"内置框架","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[4]},{"type":"text","content":"为了更好的维护本网站，我们提供了一个极小的“框架”用于协调资源和代码，主要包括两个方面：打包工具 + 前端框架。","childNodes":[]},{"type":"tag","name":"h2","attrs":{},"childNodes":[6]},{"type":"text","content":"打包工具","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[8,9,11,12,14,15,17]},{"type":"text","content":"工具的入口分为开发dev和生产build，分别位于：","childNodes":[]},{"type":"tag","name":"span","attrs":{"class":"important"},"childNodes":[10]},{"type":"text","content":"./bin/pkg/server","childNodes":[]},{"type":"text","content":"和","childNodes":[]},{"type":"tag","name":"span","attrs":{"class":"important"},"childNodes":[13]},{"type":"text","content":"./bin/pkg/builder","childNodes":[]},{"type":"text","content":"处。\r\n    此外，用于解析各种类型的文件的代码存放在：","childNodes":[]},{"type":"tag","name":"span","attrs":{"class":"important"},"childNodes":[16]},{"type":"text","content":"./bin/loader","childNodes":[]},{"type":"text","content":"下。","childNodes":[]},{"type":"tag","name":"h2","attrs":{},"childNodes":[19]},{"type":"text","content":"前端框架","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[21]},{"type":"text","content":"其实就是一些零碎的方法，用于给html页面赋予有用的功能。","childNodes":[]},{"type":"tag","name":"h3","attrs":{},"childNodes":[23]},{"type":"text","content":"useTemplate","childNodes":[]},{"type":"tag","name":"pre","attrs":{},"childNodes":[25]},{"type":"text","content":"import useTemplate from \"./src/framework/useTemplate\";\r\nvar instance = useTemplate(el, pageFunction, props);","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[27]},{"type":"text","content":"返回的实例instance表示新的内容对象，而传递的pageFunction是一个函数，包含了意图。","childNodes":[]},{"type":"tag","name":"h4","attrs":{},"childNodes":[29]},{"type":"text","content":"pageFunction","childNodes":[]},{"type":"tag","name":"pre","attrs":{},"childNodes":[31]},{"type":"text","content":"function (obj, props) {\r\n    return {\r\n\r\n        render: template, // 模板\r\n        data: {}, // 数据\r\n\r\n        /*\r\n         * 生命周期\r\n         *\r\n         * 视图、窗口、弹框等不一定都实现了下面的钩子，\r\n         * 只不过，如果实现了，都会按照规范下面起名\r\n         *\r\n         * 部分钩子可以设计返回一个布尔值控制默认操作是否执行\r\n         */\r\n        beforeMount: function () {}, // 挂载前\r\n        mounted: function () {}, // 挂载后\r\n        beforeUpdate: function () {}, // 数据改变前\r\n        updated: function () {}, // 数据改变后\r\n        beforeDestory: function () {}, // 组件销毁前\r\n        destoryed: function () {}, // 组件销毁后\r\n        minimize: function () {}, // 组件最小化前\r\n        reshow: function () {}, // 组件恢复显示后\r\n        beforeFocus: function () {}, // 组件聚焦显示前\r\n        focused: function () {}, // 组件聚焦显示后\r\n        beforeUnfocus: function () {}, // 组件失去聚焦前\r\n        unfocused: function () {}, // 组件失去聚焦后\r\n        show: function () {}, // 组件显示\r\n        hidden: function () {}, // 组件隐藏\r\n\r\n        methods: {} // 方法\r\n    };\r\n};","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[33]},{"type":"text","content":"可以看出来，这个函数有一个形参数obj，其中有一些有用的方法。","childNodes":[]},{"type":"tag","name":"h4","attrs":{},"childNodes":[35]},{"type":"text","content":"obj.ref","childNodes":[]},{"type":"tag","name":"pre","attrs":{},"childNodes":[37]},{"type":"text","content":"data:{\r\n        param:obj.ref(initValue)\r\n    }","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[39]},{"type":"text","content":"如此定义的数据，就可以在方法、钩子等中通过 this.param 使用了，而通过指令等，也可以在页面使用，可以实现视图和数据等绑定。","childNodes":[]},{"type":"tag","name":"h4","attrs":{},"childNodes":[41]},{"type":"text","content":"obj.reactive","childNodes":[]},{"type":"tag","name":"pre","attrs":{},"childNodes":[43]},{"type":"text","content":"data:{\r\n        param:obj.reactive(initValue)\r\n    }","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[45]},{"type":"text","content":"和 ref 类似，唯一不同的是，前者不支持数据改变的深度监听。","childNodes":[]},{"type":"tag","name":"h3","attrs":{},"childNodes":[47]},{"type":"text","content":"指令","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[49]},{"type":"text","content":"全局指令都存放在 ./src/directives 中，定义一个指令的语法非常简单：","childNodes":[]},{"type":"tag","name":"pre","attrs":{},"childNodes":[51]},{"type":"text","content":"export default {\r\n    inserted: function (el, binding) { \r\n        // 初始化插入页面触发\r\n    },\r\n    update: function (el, binding) { \r\n        // 数据改变触发\r\n    }\r\n};","childNodes":[]},{"type":"tag","name":"h3","attrs":{},"childNodes":[53]},{"type":"text","content":"ref","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[55]},{"type":"text","content":"如果你希望获取页面中一个节点，可以提前使用下面的方法标记一下：","childNodes":[]},{"type":"tag","name":"pre","attrs":{},"childNodes":[57]},{"type":"text","content":"<canvas ref=\"mycanvas\"></canvas>","childNodes":[]},{"type":"tag","name":"p","attrs":{},"childNodes":[59]},{"type":"text","content":"然后使用的时候就可以通过ref语法获取：","childNodes":[]},{"type":"tag","name":"pre","attrs":{},"childNodes":[61]},{"type":"text","content":"var canvas = this._refs.mycanvas.value;","childNodes":[]}]
+    __pkg__scope_bundle__.default= [{"type":"tag","name":"root","attrs":{},"childNodes":[1,9,11]},{"type":"tag","name":"header","attrs":{"class":"top-title"},"childNodes":[2]},{"type":"tag","name":"div","attrs":{},"childNodes":[3,5,7]},{"type":"tag","name":"button","attrs":{"class":"goback","ui-on:click.stop":"$minView"},"childNodes":[4]},{"type":"text","content":"返回","childNodes":[]},{"type":"tag","name":"h2","attrs":{},"childNodes":[6]},{"type":"text","content":"录屏软件","childNodes":[]},{"type":"tag","name":"button","attrs":{"class":"close","ui-on:click.stop":"$closeView"},"childNodes":[8]},{"type":"text","content":"关闭","childNodes":[]},{"type":"tag","name":"button","attrs":{"ui-on:click":"startRecorder","ui-bind:active":"isRun?'no':'yes'"},"childNodes":[10]},{"type":"text","content":"启动","childNodes":[]},{"type":"tag","name":"video","attrs":{"ref":"video"},"childNodes":[]}]
+
+    return __pkg__scope_bundle__;
+}
+
+/*************************** [bundle] ****************************/
+// Original file:./src/mobile/recorder-screen/index.scss
+/*****************************************************************/
+window.__pkg__bundleSrc__['348']=function(){
+    var __pkg__scope_bundle__={};
+    var __pkg__scope_args__;
+    var styleElement = document.createElement('style');
+var head = document.head || document.getElementsByTagName('head')[0];
+styleElement.innerHTML = "\n [page-view=\"recorder-screen\"]{\n\nfont-size: 0;\n\n}\n\n [page-view=\"recorder-screen\"]>button{\n\nposition: absolute;\n\nheight: 30px;\n\nline-height: 30px;\n\npadding: 0 10px;\n\nborder: none;\n\ncursor: pointer;\n\nbackground-color: red;\n\ncolor: white;\n\nborder-radius: 15px;\n\ntop: 7.5px;\n\nright: 45px;\n\nfont-size: 13px;\n\n}\n\n [page-view=\"recorder-screen\"]>button[active='no']{\n\nbackground-color: rgb(239, 139, 139);\n\ncursor: not-allowed;\n\n}\n\n [page-view=\"recorder-screen\"]>video{\n\nwidth: 100vw;\n\nheight: calc(var(--height) - 45px);\n\nbackground-color: black;\n\n}\n";
+styleElement.setAttribute('type', 'text/css');head.appendChild(styleElement);
 
     return __pkg__scope_bundle__;
 }

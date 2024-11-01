@@ -52,7 +52,7 @@ export default function (obj, props) {
             layers: [],
 
             // 颜色
-            forecolor: obj.ref('white'), // 前景色
+            forecolor: obj.ref('red'), // 前景色
             backcolor: obj.ref('black'), // 背景色
 
             // 移动工具
@@ -161,7 +161,26 @@ export default function (obj, props) {
 
                         // 被选中的需要修改记录的canvas内容
                         if (_this.layers[i].rootEl.getAttribute('active') == 'yes') {
-                            _this.layers[i].painter.clearRect(position.x - _this.eraser_size * 0.5, position.y - _this.eraser_size * 0.5, _this.eraser_size, _this.eraser_size);
+                            _this.layers[i].painter.clearCircle(position.x, position.y, +_this.eraser_size);
+                        }
+
+                        painter.drawImage(_this.layers[i].canvas);
+                    }
+                }
+
+                // 画笔
+                else if (_this.activeTool == 'painter') {
+
+                    // 先擦除画布
+                    painter.clearRect(0, 0, _this.width, _this.height);
+
+                    for (i = _this.layers.length - 1; i >= 0; i--) {
+
+                        // 被选中的需要修改记录的canvas内容
+                        if (_this.layers[i].rootEl.getAttribute('active') == 'yes') {
+                            _this.layers[i].painter.config({
+                                fillStyle: _this.forecolor
+                            }).fillCircle(position.x, position.y, +_this.painter_size);
                         }
 
                         painter.drawImage(_this.layers[i].canvas);
@@ -177,8 +196,10 @@ export default function (obj, props) {
                 var position = mousePosition(_this._refs.mycanvas.value, event);
 
                 cursorPainter.config({
-                    fillStyle: "#f00",
-                    strokeStyle: "white"
+                    fillStyle: "black",
+                    strokeStyle: "black",
+                    shadowColor: "white",
+                    shadowBlur: 2
                 });
 
                 // 移动
@@ -190,10 +211,10 @@ export default function (obj, props) {
                     // 鼠标
                     cursorPainter.beginPath()
                         .moveTo(position.x, position.y)
-                        .lineTo(position.x + 20, position.y + 10)
-                        .lineTo(position.x + 10, position.y + 10)
-                        .lineTo(position.x + 10, position.y + 20)
-                        .closePath().full()
+                        .lineTo(position.x + 15, position.y + 5)
+                        .lineTo(position.x + 8, position.y + 8)
+                        .lineTo(position.x + 5, position.y + 15)
+                        .closePath().fill();
                 }
 
                 // 抓手工具
@@ -213,7 +234,7 @@ export default function (obj, props) {
 
                             // 被选中的需要修改记录的canvas内容
                             if (_this.layers[i].rootEl.getAttribute('active') == 'yes') {
-                                _this.layers[i].painter.clearRect(position.x - _this.eraser_size * 0.5, position.y - _this.eraser_size * 0.5, _this.eraser_size, _this.eraser_size);
+                                _this.layers[i].painter.clearCircle(position.x, position.y, +_this.eraser_size);
                             }
 
                             painter.drawImage(_this.layers[i].canvas);
@@ -221,7 +242,30 @@ export default function (obj, props) {
                     }
 
                     // 鼠标
-                    cursorPainter.fullRect(position.x - _this.eraser_size * 0.5, position.y - _this.eraser_size * 0.5, _this.eraser_size, _this.eraser_size);
+                    cursorPainter.strokeCircle(position.x, position.y, +_this.eraser_size);
+                }
+
+                // 画笔
+                else if (_this.activeTool == 'painter') {
+                    if (mouseIsDown) {
+                        // 先擦除画布
+                        painter.clearRect(0, 0, _this.width, _this.height);
+
+                        for (i = _this.layers.length - 1; i >= 0; i--) {
+
+                            // 被选中的需要修改记录的canvas内容
+                            if (_this.layers[i].rootEl.getAttribute('active') == 'yes') {
+                                _this.layers[i].painter.config({
+                                    fillStyle: _this.forecolor
+                                }).fillCircle(position.x, position.y, +_this.painter_size);
+                            }
+
+                            painter.drawImage(_this.layers[i].canvas);
+                        }
+                    }
+
+                    // 鼠标
+                    cursorPainter.strokeCircle(position.x, position.y, +_this.painter_size);
                 }
 
                 // 背景橡皮擦
@@ -229,13 +273,6 @@ export default function (obj, props) {
                     if (mouseIsDown) {
 
                     }
-
-                    // 鼠标
-                    cursorPainter.fullRect(position.x - _this.eraser_bg_size * 0.5, position.y - _this.eraser_bg_size * 0.5, _this.eraser_bg_size, _this.eraser_bg_size)
-                        .config({
-                            strokeStyle: "#f00"
-                        }).beginPath().moveTo(position.x - 10 - _this.eraser_bg_size * 0.5, position.y - 10 - _this.eraser_bg_size * 0.5).lineTo(position.x - _this.eraser_bg_size * 0.5, position.y - _this.eraser_bg_size * 0.5).stroke()
-                        .beginPath().moveTo(position.x - 10 - _this.eraser_bg_size * 0.5, position.y - _this.eraser_bg_size * 0.5).lineTo(position.x - _this.eraser_bg_size * 0.5, position.y - 10 - _this.eraser_bg_size * 0.5).stroke()
                 }
 
             });

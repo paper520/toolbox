@@ -93,8 +93,17 @@
             树图<span>tree</span>
         </h4>
         <ul>
-            <li>
-
+            <li ui-on:click="openExamples" tag="tree-layout-lr">
+                <div class="tree-layout-lr"></div>
+                <h6>
+                    从左到右树状图
+                </h6>
+            </li>
+            <li ui-on:click="openExamples" tag="tree-radial">
+                <div class="tree-radial"></div>
+                <h6>
+                    径向树状图
+                </h6>
             </li>
         </ul>
         <h4>
@@ -131,8 +140,11 @@
             桑基图<span>sankey</span>
         </h4>
         <ul>
-            <li>
-
+            <li ui-on:click="openExamples" tag="sankey-nodeAlign-left">
+                <div class="sankey-nodeAlign-left"></div>
+                <h6>
+                    桑基图左对齐布局
+                </h6>
             </li>
         </ul>
         <h4>
@@ -158,8 +170,11 @@
             数据区域缩放<span>dataZoom</span>
         </h4>
         <ul>
-            <li>
-
+            <li ui-on:click="openExamples" tag="zoom-line">
+                <div class="zoom-line"></div>
+                <h6>
+                    可缩放折线图
+                </h6>
             </li>
         </ul>
         <h4>
@@ -170,6 +185,12 @@
                 <div class="money-schedule"></div>
                 <h6>
                     金额波浪球
+                </h6>
+            </li>
+            <li ui-on:click="openExamples" tag="single-wave">
+                <div class="single-wave"></div>
+                <h6>
+                    单波进度球
                 </h6>
             </li>
         </ul>

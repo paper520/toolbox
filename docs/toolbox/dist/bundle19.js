@@ -5,16 +5,16 @@
 window.__pkg__bundleSrc__['75']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('225');
+    __pkg__scope_args__=window.__pkg__getBundle('228');
 var template =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('226');
+__pkg__scope_args__=window.__pkg__getBundle('229');
 
 
-__pkg__scope_args__=window.__pkg__getBundle('140');
+__pkg__scope_args__=window.__pkg__getBundle('143');
 var canvasRender =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('169');
+__pkg__scope_args__=window.__pkg__getBundle('172');
 var getKeyCode =__pkg__scope_args__.default;
 
 
@@ -212,7 +212,7 @@ __pkg__scope_bundle__.default= function (obj) {
 /*************************** [bundle] ****************************/
 // Original file:./src/pages/snake-eating/index.html
 /*****************************************************************/
-window.__pkg__bundleSrc__['225']=function(){
+window.__pkg__bundleSrc__['228']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_bundle__.default= [{"type":"tag","name":"root","attrs":{},"childNodes":[1,8,9]},{"type":"tag","name":"h2","attrs":{"ui-dragdrop:desktop":""},"childNodes":[2,3]},{"type":"text","content":"贪吃蛇","childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"win-btns"},"childNodes":[4,6]},{"type":"tag","name":"button","attrs":{"class":"min","ui-on:click.stop":"$minView"},"childNodes":[5]},{"type":"text","content":"最小化","childNodes":[]},{"type":"tag","name":"button","attrs":{"class":"close","ui-on:click.stop":"$closeView"},"childNodes":[7]},{"type":"text","content":"关闭","childNodes":[]},{"type":"tag","name":"canvas","attrs":{"ref":"mycanvas"},"childNodes":[]},{"type":"tag","name":"div","attrs":{"ui-bind:active":"isRuning?'no':'yes'"},"childNodes":[10,11]},{"type":"tag","name":"span","attrs":{"ui-bind":"tips"},"childNodes":[]},{"type":"tag","name":"button","attrs":{"ui-on:click":"beginGame"},"childNodes":[12]},{"type":"text","content":"开始游戏","childNodes":[]}]
@@ -223,7 +223,7 @@ window.__pkg__bundleSrc__['225']=function(){
 /*************************** [bundle] ****************************/
 // Original file:./src/pages/snake-eating/index.scss
 /*****************************************************************/
-window.__pkg__bundleSrc__['226']=function(){
+window.__pkg__bundleSrc__['229']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     var styleElement = document.createElement('style');
@@ -237,20 +237,20 @@ styleElement.setAttribute('type', 'text/css');head.appendChild(styleElement);
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/canvas/index
 /*****************************************************************/
-window.__pkg__bundleSrc__['140']=function(){
+window.__pkg__bundleSrc__['143']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('141');
+    __pkg__scope_args__=window.__pkg__getBundle('144');
 var initText=__pkg__scope_args__.initText;
 var initArc=__pkg__scope_args__.initArc;
 var initCircle=__pkg__scope_args__.initCircle;
 var initRect=__pkg__scope_args__.initRect;
 
-__pkg__scope_args__=window.__pkg__getBundle('143');
+__pkg__scope_args__=window.__pkg__getBundle('146');
 var linearGradient=__pkg__scope_args__.linearGradient;
 var radialGradient=__pkg__scope_args__.radialGradient;
 
-__pkg__scope_args__=window.__pkg__getBundle('141');
+__pkg__scope_args__=window.__pkg__getBundle('144');
 var initPainterConfig=__pkg__scope_args__.initPainterConfig;
 
 
@@ -418,6 +418,15 @@ __pkg__scope_bundle__.default= function (canvas, width, height, opts, isScale) {
 
         // 擦除画面
         "clearRect": function (x, y, w, h) { painter.clearRect(x, y, w, h); return enhancePainter; },
+        "clearCircle": function (cx, cy, r) {
+            painter.beginPath();
+            painter.globalCompositeOperation = "destination-out";
+            painter.arc(cx, cy, r, 0, Math.PI * 2); // 绘制圆形
+            painter.fill(); // 填充圆形，这将会清除这个圆形区域
+            painter.globalCompositeOperation = "source-over";
+            painter.closePath();
+            return enhancePainter;
+        },
 
         // 弧
         "fillArc": function (cx, cy, r1, r2, beginDeg, deg) {
@@ -528,10 +537,10 @@ __pkg__scope_bundle__.default= function (canvas, width, height, opts, isScale) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/canvas/config
 /*****************************************************************/
-window.__pkg__bundleSrc__['141']=function(){
+window.__pkg__bundleSrc__['144']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('142');
+    __pkg__scope_args__=window.__pkg__getBundle('145');
 var arc =__pkg__scope_args__.default;
 
 
@@ -543,17 +552,23 @@ __pkg__scope_bundle__.initPainterConfig = {
     // 轮廓色或图案
     "strokeStyle": 'black',
 
+    // 线的端点类型，（"butt"平直边缘、"round"半圆和"square"矩形）
+    "lineCap": "butt",
+
+    // 线的拐角连接方式，（"miter"连接处边缘延长相接、"bevel"对角线斜角和"round"圆）
+    "lineJoin": "miter",
+
     // 线条宽度(单位px，下同)
     "lineWidth": 1,
+
+    // 设置线条虚线，应该是一个数组[number,...]
+    "lineDash": [],
 
     // 文字水平对齐方式（"left"左对齐、"center"居中和"right"右对齐）
     "textAlign": 'left',
 
     // 文字垂直对齐方式（"middle"垂直居中、"top"上对齐和"bottom"下对齐）
     "textBaseline": 'middle',
-
-    // 设置线条虚线，应该是一个数组[number,...]
-    "lineDash": [],
 
     // 阴影的模糊系数，默认0，也就是无阴影
     "shadowBlur": 0,
@@ -644,7 +659,7 @@ __pkg__scope_bundle__.initRect = function (painter, x, y, width, height) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/canvas/arc
 /*****************************************************************/
-window.__pkg__bundleSrc__['142']=function(){
+window.__pkg__bundleSrc__['145']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     
@@ -705,7 +720,7 @@ __pkg__scope_bundle__.default= function (beginA, rotateA, cx, cy, r1, r2, doback
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/canvas/Gradient
 /*****************************************************************/
-window.__pkg__bundleSrc__['143']=function(){
+window.__pkg__bundleSrc__['146']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 线性渐变
@@ -745,7 +760,7 @@ __pkg__scope_bundle__.radialGradient = function (painter, cx, cy, r1, r2) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/keyCode
 /*****************************************************************/
-window.__pkg__bundleSrc__['169']=function(){
+window.__pkg__bundleSrc__['172']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 字典表

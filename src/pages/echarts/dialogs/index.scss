@@ -11,6 +11,7 @@
         background-color: #ffffff;
         border-bottom: 1px solid rgb(187, 184, 184);
         white-space: nowrap;
+        overflow: hidden;
 
         &>h2 {
             color: #000000;
@@ -47,6 +48,7 @@
             height: calc(100% - 50px);
             text-align: center;
             background-color: white;
+            overflow: hidden;
         }
     }
 }

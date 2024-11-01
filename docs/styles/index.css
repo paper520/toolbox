@@ -1,0 +1,131 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: fantasy, cursive;
+    padding-bottom: 100px;
+}
+
+body a:hover {
+    text-decoration: underline;
+}
+
+body>header {
+    line-height: 40px;
+    font-family: cursive;
+    position: relative;
+}
+
+body>header>h2 {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: top;
+    background-image: url("../images/index.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: auto 90%;
+    padding-left: 35px;
+}
+
+body>header a {
+    color: rgb(225, 221, 221);
+    display: inline-block;
+}
+
+body>header>a.nav-item {
+    margin-left: 10px;
+}
+
+body>header>.right {
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+
+body>.homepage {
+    background-color: #607D8B;
+    text-align: center;
+    padding: 50px 0;
+}
+
+body>.homepage>h1 {
+    font-size: 50px;
+}
+
+body>.homepage>p {
+    padding: 20px 0;
+    margin-top: 10x;
+}
+
+body>.homepage>.btn {
+    color: rgb(229, 237, 245);
+    width: 120px;
+    line-height: 40px;
+    border: 1px solid rgb(229, 237, 245);
+    padding: 0 10px;
+    font-family: fangsong;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+body>.organizations {
+    text-align: center;
+    margin-top: 30px;
+}
+
+body>.organizations>.item {
+    display: inline-block;
+    width: 260px;
+    margin: 0 30px;
+    color: inherit;
+}
+
+body>.organizations>.item>.icon {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+body>.organizations>.item>.icon.oi-contrib {
+    background-image: url("../images/oi-contrib.png");
+}
+
+body>.organizations>.item>.icon.handless-ui {
+    background-image: url("../images/handlessUI.png");
+}
+
+body>.organizations>.item>.icon.ll-store {
+    background-image: url("../images/LL-Store.png");
+}
+
+body>.organizations>.item>h2 {
+    text-align: left;
+    font-size: 20px;
+    margin-top: 20px;
+    font-family: sans-serif;
+}
+
+body>.organizations>.item>p {
+    text-align: left;
+    font-size: 14px;
+    margin-top: 10px;
+    line-height: 1.4em;
+}
+
+body>footer {
+    font-family: monospace;
+    background-color: rgb(48 56 70);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+}
+
+body>footer>.copyright {
+    text-align: center;
+    line-height: 50px;
+    height: 50px;
+    font-size: 15px;
+}

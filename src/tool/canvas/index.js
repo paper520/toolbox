@@ -166,6 +166,15 @@ export default function (canvas, width, height, opts, isScale) {
 
         // 擦除画面
         "clearRect": function (x, y, w, h) { painter.clearRect(x, y, w, h); return enhancePainter; },
+        "clearCircle": function (cx, cy, r) {
+            painter.beginPath();
+            painter.globalCompositeOperation = "destination-out";
+            painter.arc(cx, cy, r, 0, Math.PI * 2); // 绘制圆形
+            painter.fill(); // 填充圆形，这将会清除这个圆形区域
+            painter.globalCompositeOperation = "source-over";
+            painter.closePath();
+            return enhancePainter;
+        },
 
         // 弧
         "fillArc": function (cx, cy, r1, r2, beginDeg, deg) {

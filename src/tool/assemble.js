@@ -4,7 +4,7 @@ export default function (begin, end, step, count) {
 
     // 非常类似进制数，每次调用都+1
     return function () {
-        for (let i = 0; i < count; i++) {
+        for (var i = 0; i < count; i++) {
 
             // 如果当前位可以进1
             if (val[i] + step < end) {

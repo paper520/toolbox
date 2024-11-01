@@ -31,7 +31,7 @@ function urlFormat(url) {
     }
 
     return resultData;
-};
+}
 
 // 加载新的页面
 
@@ -76,7 +76,7 @@ function loadPage(pagename, callback) {
     xmlhttp.timeout = 6000;
 
     xmlhttp.send();
-};
+}
 
 function updateUrl() {
     window.noFresh = true;
@@ -86,7 +86,11 @@ function updateUrl() {
         paramsStr += key + "=" + urlObj.params[key] + "&";
     }
     window.location.href = "#/" + urlObj.router.join('/') + (paramsStr == "" ? "" : "?" + paramsStr.replace(/\&$/, ''));
-};
+}
+
+function fixedTo(fixedId) {
+    document.getElementById("fixed-id-" + fixedId).click();
+}
 
 function initFixed(docEl, fixedMenuEl) {
     var els = docEl.children;
@@ -95,12 +99,17 @@ function initFixed(docEl, fixedMenuEl) {
         (function (index) {
 
             if (["H2", "H3", "H4"].indexOf(els[index].nodeName) > -1) {
-
                 var fixedItemEl = document.createElement(els[index].nodeName);
+
+                var fixedId = els[index].getAttribute("fixed");
+                if (fixedId) {
+                    fixedItemEl.setAttribute("id", "fixed-id-" + fixedId);
+                }
+
                 fixedMenuEl.appendChild(fixedItemEl);
                 fixedItemEl.innerHTML = els[index].innerHTML;
                 fixedItemEl.addEventListener('click', function () {
-                    docEl.scrollTop=els[index].offsetTop;
+                    docEl.scrollTop = els[index].offsetTop;
                 });
 
             }

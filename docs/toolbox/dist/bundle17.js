@@ -5,26 +5,26 @@
 window.__pkg__bundleSrc__['73']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('176');
+    __pkg__scope_args__=window.__pkg__getBundle('179');
 var template =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('177');
+__pkg__scope_args__=window.__pkg__getBundle('180');
 
-
-__pkg__scope_args__=window.__pkg__getBundle('178');
-var lazyDialogs =__pkg__scope_args__.default;
 
 __pkg__scope_args__=window.__pkg__getBundle('181');
+var lazyDialogs =__pkg__scope_args__.default;
+
+__pkg__scope_args__=window.__pkg__getBundle('184');
 var lazyWins =__pkg__scope_args__.default;
 
 
-__pkg__scope_args__=window.__pkg__getBundle('184');
+__pkg__scope_args__=window.__pkg__getBundle('187');
 var imageToCanvas =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('140');
+__pkg__scope_args__=window.__pkg__getBundle('143');
 var canvasRender =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('169');
+__pkg__scope_args__=window.__pkg__getBundle('172');
 var getKeyCode =__pkg__scope_args__.default;
 
 __pkg__scope_args__=window.__pkg__getBundle('22');
@@ -36,7 +36,7 @@ var remove =__pkg__scope_args__.default;
 __pkg__scope_args__=window.__pkg__getBundle('31');
 var isString =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('105');
+__pkg__scope_args__=window.__pkg__getBundle('108');
 var mousePosition =__pkg__scope_args__.default;
 
 
@@ -80,7 +80,7 @@ __pkg__scope_bundle__.default= function (obj, props) {
             layers: [],
 
             // 颜色
-            forecolor: obj.ref('white'), // 前景色
+            forecolor: obj.ref('red'), // 前景色
             backcolor: obj.ref('black'), // 背景色
 
             // 移动工具
@@ -189,7 +189,26 @@ __pkg__scope_bundle__.default= function (obj, props) {
 
                         // 被选中的需要修改记录的canvas内容
                         if (_this.layers[i].rootEl.getAttribute('active') == 'yes') {
-                            _this.layers[i].painter.clearRect(position.x - _this.eraser_size * 0.5, position.y - _this.eraser_size * 0.5, _this.eraser_size, _this.eraser_size);
+                            _this.layers[i].painter.clearCircle(position.x, position.y, +_this.eraser_size);
+                        }
+
+                        painter.drawImage(_this.layers[i].canvas);
+                    }
+                }
+
+                // 画笔
+                else if (_this.activeTool == 'painter') {
+
+                    // 先擦除画布
+                    painter.clearRect(0, 0, _this.width, _this.height);
+
+                    for (i = _this.layers.length - 1; i >= 0; i--) {
+
+                        // 被选中的需要修改记录的canvas内容
+                        if (_this.layers[i].rootEl.getAttribute('active') == 'yes') {
+                            _this.layers[i].painter.config({
+                                fillStyle: _this.forecolor
+                            }).fillCircle(position.x, position.y, +_this.painter_size);
                         }
 
                         painter.drawImage(_this.layers[i].canvas);
@@ -205,8 +224,10 @@ __pkg__scope_bundle__.default= function (obj, props) {
                 var position = mousePosition(_this._refs.mycanvas.value, event);
 
                 cursorPainter.config({
-                    fillStyle: "#f00",
-                    strokeStyle: "white"
+                    fillStyle: "black",
+                    strokeStyle: "black",
+                    shadowColor: "white",
+                    shadowBlur: 2
                 });
 
                 // 移动
@@ -218,10 +239,10 @@ __pkg__scope_bundle__.default= function (obj, props) {
                     // 鼠标
                     cursorPainter.beginPath()
                         .moveTo(position.x, position.y)
-                        .lineTo(position.x + 20, position.y + 10)
-                        .lineTo(position.x + 10, position.y + 10)
-                        .lineTo(position.x + 10, position.y + 20)
-                        .closePath().full()
+                        .lineTo(position.x + 15, position.y + 5)
+                        .lineTo(position.x + 8, position.y + 8)
+                        .lineTo(position.x + 5, position.y + 15)
+                        .closePath().fill();
                 }
 
                 // 抓手工具
@@ -241,7 +262,7 @@ __pkg__scope_bundle__.default= function (obj, props) {
 
                             // 被选中的需要修改记录的canvas内容
                             if (_this.layers[i].rootEl.getAttribute('active') == 'yes') {
-                                _this.layers[i].painter.clearRect(position.x - _this.eraser_size * 0.5, position.y - _this.eraser_size * 0.5, _this.eraser_size, _this.eraser_size);
+                                _this.layers[i].painter.clearCircle(position.x, position.y, +_this.eraser_size);
                             }
 
                             painter.drawImage(_this.layers[i].canvas);
@@ -249,7 +270,30 @@ __pkg__scope_bundle__.default= function (obj, props) {
                     }
 
                     // 鼠标
-                    cursorPainter.fullRect(position.x - _this.eraser_size * 0.5, position.y - _this.eraser_size * 0.5, _this.eraser_size, _this.eraser_size);
+                    cursorPainter.strokeCircle(position.x, position.y, +_this.eraser_size);
+                }
+
+                // 画笔
+                else if (_this.activeTool == 'painter') {
+                    if (mouseIsDown) {
+                        // 先擦除画布
+                        painter.clearRect(0, 0, _this.width, _this.height);
+
+                        for (i = _this.layers.length - 1; i >= 0; i--) {
+
+                            // 被选中的需要修改记录的canvas内容
+                            if (_this.layers[i].rootEl.getAttribute('active') == 'yes') {
+                                _this.layers[i].painter.config({
+                                    fillStyle: _this.forecolor
+                                }).fillCircle(position.x, position.y, +_this.painter_size);
+                            }
+
+                            painter.drawImage(_this.layers[i].canvas);
+                        }
+                    }
+
+                    // 鼠标
+                    cursorPainter.strokeCircle(position.x, position.y, +_this.painter_size);
                 }
 
                 // 背景橡皮擦
@@ -257,13 +301,6 @@ __pkg__scope_bundle__.default= function (obj, props) {
                     if (mouseIsDown) {
 
                     }
-
-                    // 鼠标
-                    cursorPainter.fullRect(position.x - _this.eraser_bg_size * 0.5, position.y - _this.eraser_bg_size * 0.5, _this.eraser_bg_size, _this.eraser_bg_size)
-                        .config({
-                            strokeStyle: "#f00"
-                        }).beginPath().moveTo(position.x - 10 - _this.eraser_bg_size * 0.5, position.y - 10 - _this.eraser_bg_size * 0.5).lineTo(position.x - _this.eraser_bg_size * 0.5, position.y - _this.eraser_bg_size * 0.5).stroke()
-                        .beginPath().moveTo(position.x - 10 - _this.eraser_bg_size * 0.5, position.y - _this.eraser_bg_size * 0.5).lineTo(position.x - _this.eraser_bg_size * 0.5, position.y - 10 - _this.eraser_bg_size * 0.5).stroke()
                 }
 
             });
@@ -628,10 +665,10 @@ __pkg__scope_bundle__.default= function (obj, props) {
 /*************************** [bundle] ****************************/
 // Original file:./src/pages/image-editor/index.html
 /*****************************************************************/
-window.__pkg__bundleSrc__['176']=function(){
+window.__pkg__bundleSrc__['179']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_bundle__.default= [{"type":"tag","name":"root","attrs":{},"childNodes":[1,4,46,85]},{"type":"tag","name":"div","attrs":{"class":"no-view"},"childNodes":[2,3]},{"type":"tag","name":"input","attrs":{"type":"file","ref":"imgFile1","flag":"import","ui-on:change":"openImage","accept":"image/*"},"childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"file","ref":"imgFile2","flag":"append","ui-on:change":"openImage","accept":"image/*","multiple":""},"childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"menu","ui-dragdrop:desktop":""},"childNodes":[5,7,41]},{"type":"tag","name":"h2","attrs":{},"childNodes":[6]},{"type":"text","content":"图片编辑器","childNodes":[]},{"type":"tag","name":"ul","attrs":{},"childNodes":[8,21,31]},{"type":"tag","name":"li","attrs":{},"childNodes":[9,11]},{"type":"tag","name":"label","attrs":{},"childNodes":[10]},{"type":"text","content":"文件","childNodes":[]},{"type":"tag","name":"ul","attrs":{},"childNodes":[12,15,18]},{"type":"tag","name":"li","attrs":{},"childNodes":[13]},{"type":"tag","name":"label","attrs":{"tag":"imgFile1","ui-on:click":"triggleBtn"},"childNodes":[14]},{"type":"text","content":"打开","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[16]},{"type":"tag","name":"label","attrs":{"ui-on:click":"saveImage"},"childNodes":[17]},{"type":"text","content":"保存","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[19]},{"type":"tag","name":"label","attrs":{"tag":"imgFile2","ui-on:click":"triggleBtn"},"childNodes":[20]},{"type":"text","content":"置入","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[22,24]},{"type":"tag","name":"label","attrs":{},"childNodes":[23]},{"type":"text","content":"图像","childNodes":[]},{"type":"tag","name":"ul","attrs":{},"childNodes":[25,28]},{"type":"tag","name":"li","attrs":{},"childNodes":[26]},{"type":"tag","name":"label","attrs":{"ui-on:click":"editCanvasSize"},"childNodes":[27]},{"type":"text","content":"画布大小","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[29]},{"type":"tag","name":"label","attrs":{"ui-on:click":"editImageSize"},"childNodes":[30]},{"type":"text","content":"图像大小","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[32,34]},{"type":"tag","name":"label","attrs":{},"childNodes":[33]},{"type":"text","content":"窗口","childNodes":[]},{"type":"tag","name":"ul","attrs":{},"childNodes":[35,38]},{"type":"tag","name":"li","attrs":{},"childNodes":[36]},{"type":"tag","name":"label","attrs":{"ui-on:click":"toggleWin","tag":"layer","ui-bind:active":"isMenuOpen.layer?'yes':'no'"},"childNodes":[37]},{"type":"text","content":"图层","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[39]},{"type":"tag","name":"label","attrs":{"ui-on:click":"toggleWin","tag":"tool","ui-bind:active":"isMenuOpen.tool?'yes':'no'"},"childNodes":[40]},{"type":"text","content":"工具箱","childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"win-btns"},"childNodes":[42,44]},{"type":"tag","name":"button","attrs":{"class":"min","ui-on:click.stop":"$minView"},"childNodes":[43]},{"type":"text","content":"最小化","childNodes":[]},{"type":"tag","name":"button","attrs":{"class":"close","ui-on:click.stop":"$closeView"},"childNodes":[45]},{"type":"text","content":"关闭","childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"tool-config"},"childNodes":[47,51,55,59,63,67,80,84]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='move'?'yes':'no'"},"childNodes":[48]},{"type":"tag","name":"li","attrs":{},"childNodes":[49,50]},{"type":"text","content":"移动距离：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"move_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='eraser'?'yes':'no'"},"childNodes":[52]},{"type":"tag","name":"li","attrs":{},"childNodes":[53,54]},{"type":"text","content":"大小：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"eraser_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='eraser-bg'?'yes':'no'"},"childNodes":[56]},{"type":"tag","name":"li","attrs":{},"childNodes":[57,58]},{"type":"text","content":"大小：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"eraser_bg_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='drap'?'yes':'no'"},"childNodes":[60]},{"type":"tag","name":"li","attrs":{},"childNodes":[61,62]},{"type":"text","content":"移动距离：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"drap_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='painter'?'yes':'no'"},"childNodes":[64]},{"type":"tag","name":"li","attrs":{},"childNodes":[65,66]},{"type":"text","content":"大小：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"painter_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='resize'?'yes':'no'"},"childNodes":[68,74,77]},{"type":"tag","name":"li","attrs":{},"childNodes":[69,70,71,72,73]},{"type":"text","content":"方向：","childNodes":[]},{"type":"tag","name":"input","attrs":{"ui-model":"resize_direction","type":"radio","name":"resize_direction","value":"amplify"},"childNodes":[]},{"type":"text","content":"放大","childNodes":[]},{"type":"tag","name":"input","attrs":{"ui-model":"resize_direction","type":"radio","name":"resize_direction","value":"reduce"},"childNodes":[]},{"type":"text","content":"缩小","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[75,76]},{"type":"text","content":"速度：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"resize_velocity"},"childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[78]},{"type":"tag","name":"button","attrs":{"ui-on:click":"resetSize"},"childNodes":[79]},{"type":"text","content":"恢复尺寸","childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='text'?'yes':'no'"},"childNodes":[81]},{"type":"tag","name":"li","attrs":{},"childNodes":[82,83]},{"type":"text","content":"文字大小：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"text_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='geometry'?'yes':'no'"},"childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"image","ref":"editorView"},"childNodes":[86,87]},{"type":"tag","name":"canvas","attrs":{"ref":"mycanvas","ui-bind:style":"'transform:scale('+scale+');left:'+left+'px;top:'+top+'px;width:'+width+'px;height:'+height+'px;'"},"childNodes":[]},{"type":"tag","name":"canvas","attrs":{"ref":"mycursor","ui-bind:style":"'pointer-events:none;transform:scale('+scale+');left:'+left+'px;top:'+top+'px;width:'+width+'px;height:'+height+'px;'"},"childNodes":[]}]
+    __pkg__scope_bundle__.default= [{"type":"tag","name":"root","attrs":{},"childNodes":[1,4,46,85]},{"type":"tag","name":"div","attrs":{"class":"no-view"},"childNodes":[2,3]},{"type":"tag","name":"input","attrs":{"type":"file","ref":"imgFile1","flag":"import","ui-on:change":"openImage","accept":"image/*"},"childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"file","ref":"imgFile2","flag":"append","ui-on:change":"openImage","accept":"image/*","multiple":""},"childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"menu","ui-dragdrop:desktop":""},"childNodes":[5,7,41]},{"type":"tag","name":"h2","attrs":{},"childNodes":[6]},{"type":"text","content":"图片编辑器","childNodes":[]},{"type":"tag","name":"ul","attrs":{},"childNodes":[8,21,31]},{"type":"tag","name":"li","attrs":{},"childNodes":[9,11]},{"type":"tag","name":"label","attrs":{},"childNodes":[10]},{"type":"text","content":"文件","childNodes":[]},{"type":"tag","name":"ul","attrs":{},"childNodes":[12,15,18]},{"type":"tag","name":"li","attrs":{},"childNodes":[13]},{"type":"tag","name":"label","attrs":{"tag":"imgFile1","ui-on:click":"triggleBtn"},"childNodes":[14]},{"type":"text","content":"打开","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[16]},{"type":"tag","name":"label","attrs":{"ui-on:click":"saveImage"},"childNodes":[17]},{"type":"text","content":"保存","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[19]},{"type":"tag","name":"label","attrs":{"tag":"imgFile2","ui-on:click":"triggleBtn"},"childNodes":[20]},{"type":"text","content":"置入","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[22,24]},{"type":"tag","name":"label","attrs":{},"childNodes":[23]},{"type":"text","content":"图像","childNodes":[]},{"type":"tag","name":"ul","attrs":{},"childNodes":[25,28]},{"type":"tag","name":"li","attrs":{},"childNodes":[26]},{"type":"tag","name":"label","attrs":{"ui-on:click":"editCanvasSize"},"childNodes":[27]},{"type":"text","content":"画布大小","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[29]},{"type":"tag","name":"label","attrs":{"ui-on:click":"editImageSize"},"childNodes":[30]},{"type":"text","content":"图像大小","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[32,34]},{"type":"tag","name":"label","attrs":{},"childNodes":[33]},{"type":"text","content":"窗口","childNodes":[]},{"type":"tag","name":"ul","attrs":{},"childNodes":[35,38]},{"type":"tag","name":"li","attrs":{},"childNodes":[36]},{"type":"tag","name":"label","attrs":{"ui-on:click":"toggleWin","tag":"layer","ui-bind:active":"isMenuOpen.layer?'yes':'no'"},"childNodes":[37]},{"type":"text","content":"图层","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[39]},{"type":"tag","name":"label","attrs":{"ui-on:click":"toggleWin","tag":"tool","ui-bind:active":"isMenuOpen.tool?'yes':'no'"},"childNodes":[40]},{"type":"text","content":"工具箱","childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"win-btns"},"childNodes":[42,44]},{"type":"tag","name":"button","attrs":{"class":"min","ui-on:click.stop":"$minView"},"childNodes":[43]},{"type":"text","content":"最小化","childNodes":[]},{"type":"tag","name":"button","attrs":{"class":"close","ui-on:click.stop":"$closeView"},"childNodes":[45]},{"type":"text","content":"关闭","childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"tool-config"},"childNodes":[47,51,55,59,63,67,80,84]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='move'?'yes':'no'"},"childNodes":[48]},{"type":"tag","name":"li","attrs":{},"childNodes":[49,50]},{"type":"text","content":"移动距离：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"move_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='eraser'?'yes':'no'"},"childNodes":[52]},{"type":"tag","name":"li","attrs":{},"childNodes":[53,54]},{"type":"text","content":"半径：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"eraser_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='eraser-bg'?'yes':'no'"},"childNodes":[56]},{"type":"tag","name":"li","attrs":{},"childNodes":[57,58]},{"type":"text","content":"半径：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"eraser_bg_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='drap'?'yes':'no'"},"childNodes":[60]},{"type":"tag","name":"li","attrs":{},"childNodes":[61,62]},{"type":"text","content":"移动距离：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"drap_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='painter'?'yes':'no'"},"childNodes":[64]},{"type":"tag","name":"li","attrs":{},"childNodes":[65,66]},{"type":"text","content":"半径：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"painter_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='resize'?'yes':'no'"},"childNodes":[68,74,77]},{"type":"tag","name":"li","attrs":{},"childNodes":[69,70,71,72,73]},{"type":"text","content":"方向：","childNodes":[]},{"type":"tag","name":"input","attrs":{"ui-model":"resize_direction","type":"radio","name":"resize_direction","value":"amplify"},"childNodes":[]},{"type":"text","content":"放大","childNodes":[]},{"type":"tag","name":"input","attrs":{"ui-model":"resize_direction","type":"radio","name":"resize_direction","value":"reduce"},"childNodes":[]},{"type":"text","content":"缩小","childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[75,76]},{"type":"text","content":"速度：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"resize_velocity"},"childNodes":[]},{"type":"tag","name":"li","attrs":{},"childNodes":[78]},{"type":"tag","name":"button","attrs":{"ui-on:click":"resetSize"},"childNodes":[79]},{"type":"text","content":"恢复尺寸","childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='text'?'yes':'no'"},"childNodes":[81]},{"type":"tag","name":"li","attrs":{},"childNodes":[82,83]},{"type":"text","content":"文字大小：","childNodes":[]},{"type":"tag","name":"input","attrs":{"type":"text","ui-model":"text_size"},"childNodes":[]},{"type":"tag","name":"ul","attrs":{"ui-bind:active":"activeTool=='geometry'?'yes':'no'"},"childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"image","ref":"editorView"},"childNodes":[86,87]},{"type":"tag","name":"canvas","attrs":{"ref":"mycanvas","ui-bind:style":"'transform:scale('+scale+');left:'+left+'px;top:'+top+'px;width:'+width+'px;height:'+height+'px;'"},"childNodes":[]},{"type":"tag","name":"canvas","attrs":{"ref":"mycursor","ui-bind:style":"'pointer-events:none;transform:scale('+scale+');left:'+left+'px;top:'+top+'px;width:'+width+'px;height:'+height+'px;'"},"childNodes":[]}]
 
     return __pkg__scope_bundle__;
 }
@@ -639,12 +676,12 @@ window.__pkg__bundleSrc__['176']=function(){
 /*************************** [bundle] ****************************/
 // Original file:./src/pages/image-editor/index.scss
 /*****************************************************************/
-window.__pkg__bundleSrc__['177']=function(){
+window.__pkg__bundleSrc__['180']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     var styleElement = document.createElement('style');
 var head = document.head || document.getElementsByTagName('head')[0];
-styleElement.innerHTML = "\n [page-view=\"image-editor\"]{\n\nwidth: calc(100vw - 160px);\n\nheight: calc(100vh - 70px);\n\nleft: 80px;\n\ntop: 20px;\n\n}\n\n [page-view=\"image-editor\"] .no-view{\n\ndisplay: none;\n\n}\n\n [page-view=\"image-editor\"][focus=\"no\"]>div.menu{\n\nbackground-color: #afbabe;\n\n}\n\n [page-view=\"image-editor\"]>div.menu{\n\nbackground-color: #cad6db;\n\nborder-bottom: 1px solid gray;\n\nposition: relative;\n\ntop: 0;\n\nleft: 0;\n\nwidth: 100%;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>h2, [page-view=\"image-editor\"]>div.menu ul{\n\nvertical-align: top;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>h2{\n\nfont-size: 12px;\n\ndisplay: inline-block;\n\nheight: 30px;\n\nline-height: 30px;\n\nbackground-image: url('./image-editor.png');\n\nbackground-size: auto 70%;\n\nbackground-repeat: no-repeat;\n\nbackground-position: 5px center;\n\npadding-left: 30px;\n\npadding-right: 10px;\n\nborder-right: 1px solid #cccccc;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul{\n\ndisplay: inline-block;\n\nline-height: 30px;\n\nfont-size: 12px;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul label{\n\ncursor: pointer;\n\npadding: 0 5px;\n\ndisplay: block;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul label>span{\n\nfloat: right;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul ul label{\n\npadding-left: 20px;\n\nbackground-repeat: no-repeat;\n\nbackground-position: left center;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul ul label[active='yes']{\n\nbackground-image: url('./right.png');\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul li:hover{\n\nbackground-color: #cfd3d5;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul li:hover>ul{\n\ndisplay: block;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul li.split-line{\n\nbackground-color: #ebedee;\n\nheight: 1px;\n\nmargin: 2px 0;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul ul{\n\ndisplay: none;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul>li{\n\ndisplay: inline-block;\n\nmargin-left: 10px;\n\nposition: relative;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul>li>ul{\n\nposition: absolute;\n\nborder: 1px solid gray;\n\nborder-radius: 5px;\n\nwidth: 100px;\n\ntop: 25px;\n\nleft: -5px;\n\nbackground-color: white;\n\npadding: 5px 0;\n\nz-index: 1;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config{\n\nborder-bottom: 1px solid #ccc;\n\nheight: 50px;\n\nline-height: 50px;\n\nposition: relative;\n\ntop: 0;\n\nwidth: 100%;\n\nfont-size: 12px;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul{\n\ndisplay: none;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul[active='yes']{\n\ndisplay: block;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul>li{\n\npadding-left: 20px;\n\ndisplay: inline-block;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul>li>input[type=\"text\"]{\n\nwidth: 50px;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul>li>input[type='radio']{\n\nvertical-align: sub;\n\nmargin-left: 10px;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul>li>button{\n\noutline: none;\n\nborder: none;\n\nbackground-color: black;\n\ncolor: white;\n\nfont-size: 12px;\n\nborder-radius: 5px;\n\ncursor: pointer;\n\n}\n\n [page-view=\"image-editor\"]>div.image{\n\nwidth: 100%;\n\nheight: calc(100% - 80px);\n\noverflow: auto;\n\nposition: relative;\n\ntop: 0;\n\n}\n\n [page-view=\"image-editor\"]>div.image>canvas{\n\nposition: absolute;\n\noutline: 1px solid #ccc;\n\ncursor: none;\n\n}\n\n [page-view=\"image-editor\"]>div.image>canvas:first-child{\n\nbackground-image: url('./mosaic.png');\n\n}\n";
+styleElement.innerHTML = "\n [page-view=\"image-editor\"]{\n\nwidth: calc(100vw - 160px);\n\nheight: calc(100vh - 70px);\n\nleft: 80px;\n\ntop: 20px;\n\n}\n\n [page-view=\"image-editor\"] .no-view{\n\ndisplay: none;\n\n}\n\n [page-view=\"image-editor\"][focus=\"no\"]>div.menu{\n\nbackground-color: #afbabe;\n\n}\n\n [page-view=\"image-editor\"]>div.menu{\n\nbackground-color: #cad6db;\n\nborder-bottom: 1px solid gray;\n\nposition: relative;\n\ntop: 0;\n\nleft: 0;\n\nwidth: 100%;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>h2, [page-view=\"image-editor\"]>div.menu ul{\n\nvertical-align: top;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>h2{\n\nfont-size: 12px;\n\ndisplay: inline-block;\n\nheight: 30px;\n\nline-height: 30px;\n\nbackground-image: url('./image-editor.png');\n\nbackground-size: auto 70%;\n\nbackground-repeat: no-repeat;\n\nbackground-position: 5px center;\n\npadding-left: 30px;\n\npadding-right: 10px;\n\nborder-right: 1px solid #cccccc;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul{\n\ndisplay: inline-block;\n\nline-height: 30px;\n\nfont-size: 12px;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul label{\n\ncursor: pointer;\n\npadding: 0 5px;\n\ndisplay: block;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul label>span{\n\nfloat: right;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul ul label{\n\npadding-left: 20px;\n\nbackground-repeat: no-repeat;\n\nbackground-position: left center;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul ul label[active='yes']{\n\nbackground-image: url('./right.png');\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul li:hover{\n\nbackground-color: #cfd3d5;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul li:hover>ul{\n\ndisplay: block;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul li.split-line{\n\nbackground-color: #ebedee;\n\nheight: 1px;\n\nmargin: 2px 0;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul ul{\n\ndisplay: none;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul>li{\n\ndisplay: inline-block;\n\nmargin-left: 10px;\n\nposition: relative;\n\n}\n\n [page-view=\"image-editor\"]>div.menu>ul>li>ul{\n\nposition: absolute;\n\nborder: 1px solid gray;\n\nborder-radius: 5px;\n\nwidth: 100px;\n\ntop: 25px;\n\nleft: -5px;\n\nbackground-color: white;\n\npadding: 5px 0;\n\nz-index: 1;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config{\n\nborder-bottom: 1px solid #ccc;\n\nheight: 50px;\n\nline-height: 50px;\n\nposition: relative;\n\ntop: 0;\n\nwidth: 100%;\n\nfont-size: 12px;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul{\n\ndisplay: none;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul[active='yes']{\n\ndisplay: block;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul>li{\n\npadding-left: 20px;\n\ndisplay: inline-block;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul>li>input[type=\"text\"]{\n\nwidth: 50px;\n\nborder-radius: 5px;\n\npadding:3px 5px;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul>li>input[type='radio']{\n\nvertical-align: sub;\n\nmargin-left: 10px;\n\n}\n\n [page-view=\"image-editor\"]>div.tool-config>ul>li>button{\n\noutline: none;\n\nborder: none;\n\nbackground-color: black;\n\ncolor: white;\n\nfont-size: 12px;\n\nborder-radius: 5px;\n\ncursor: pointer;\n\n}\n\n [page-view=\"image-editor\"]>div.image{\n\nwidth: 100%;\n\nheight: calc(100% - 80px);\n\noverflow: auto;\n\nposition: relative;\n\ntop: 0;\n\n}\n\n [page-view=\"image-editor\"]>div.image>canvas{\n\nposition: absolute;\n\noutline: 1px solid #ccc;\n\ncursor: none;\n\n}\n\n [page-view=\"image-editor\"]>div.image>canvas:first-child{\n\nbackground-image: url('./mosaic.png');\n\n}\n";
 styleElement.setAttribute('type', 'text/css');head.appendChild(styleElement);
 
     return __pkg__scope_bundle__;
@@ -653,19 +690,19 @@ styleElement.setAttribute('type', 'text/css');head.appendChild(styleElement);
 /*************************** [bundle] ****************************/
 // Original file:./src/pages/image-editor/dialogs/lazy-load
 /*****************************************************************/
-window.__pkg__bundleSrc__['178']=function(){
+window.__pkg__bundleSrc__['181']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_bundle__.default= {
 
     // 画布或图像大小
     size: function () {
-        return window.__pkg__getLazyBundle('./dist/bundle49.js','179')
+        return window.__pkg__getLazyBundle('./dist/bundle52.js','182')
     },
 
     // 保存
     save: function () {
-        return window.__pkg__getLazyBundle('./dist/bundle50.js','180')
+        return window.__pkg__getLazyBundle('./dist/bundle53.js','183')
     }
 
 };
@@ -676,19 +713,19 @@ window.__pkg__bundleSrc__['178']=function(){
 /*************************** [bundle] ****************************/
 // Original file:./src/pages/image-editor/wins/lazy-load
 /*****************************************************************/
-window.__pkg__bundleSrc__['181']=function(){
+window.__pkg__bundleSrc__['184']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_bundle__.default= {
 
     // 工具箱
     tool: function () {
-        return window.__pkg__getLazyBundle('./dist/bundle51.js','182')
+        return window.__pkg__getLazyBundle('./dist/bundle54.js','185')
     },
 
     // 图层
     layer: function () {
-        return window.__pkg__getLazyBundle('./dist/bundle52.js','183')
+        return window.__pkg__getLazyBundle('./dist/bundle55.js','186')
     }
 
 };
@@ -699,7 +736,7 @@ window.__pkg__bundleSrc__['181']=function(){
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/imageToCanvas
 /*****************************************************************/
-window.__pkg__bundleSrc__['184']=function(){
+window.__pkg__bundleSrc__['187']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_bundle__.default= function (image, left, top, width, height) {
@@ -728,20 +765,20 @@ window.__pkg__bundleSrc__['184']=function(){
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/canvas/index
 /*****************************************************************/
-window.__pkg__bundleSrc__['140']=function(){
+window.__pkg__bundleSrc__['143']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('141');
+    __pkg__scope_args__=window.__pkg__getBundle('144');
 var initText=__pkg__scope_args__.initText;
 var initArc=__pkg__scope_args__.initArc;
 var initCircle=__pkg__scope_args__.initCircle;
 var initRect=__pkg__scope_args__.initRect;
 
-__pkg__scope_args__=window.__pkg__getBundle('143');
+__pkg__scope_args__=window.__pkg__getBundle('146');
 var linearGradient=__pkg__scope_args__.linearGradient;
 var radialGradient=__pkg__scope_args__.radialGradient;
 
-__pkg__scope_args__=window.__pkg__getBundle('141');
+__pkg__scope_args__=window.__pkg__getBundle('144');
 var initPainterConfig=__pkg__scope_args__.initPainterConfig;
 
 
@@ -909,6 +946,15 @@ __pkg__scope_bundle__.default= function (canvas, width, height, opts, isScale) {
 
         // 擦除画面
         "clearRect": function (x, y, w, h) { painter.clearRect(x, y, w, h); return enhancePainter; },
+        "clearCircle": function (cx, cy, r) {
+            painter.beginPath();
+            painter.globalCompositeOperation = "destination-out";
+            painter.arc(cx, cy, r, 0, Math.PI * 2); // 绘制圆形
+            painter.fill(); // 填充圆形，这将会清除这个圆形区域
+            painter.globalCompositeOperation = "source-over";
+            painter.closePath();
+            return enhancePainter;
+        },
 
         // 弧
         "fillArc": function (cx, cy, r1, r2, beginDeg, deg) {
@@ -1019,10 +1065,10 @@ __pkg__scope_bundle__.default= function (canvas, width, height, opts, isScale) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/canvas/config
 /*****************************************************************/
-window.__pkg__bundleSrc__['141']=function(){
+window.__pkg__bundleSrc__['144']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('142');
+    __pkg__scope_args__=window.__pkg__getBundle('145');
 var arc =__pkg__scope_args__.default;
 
 
@@ -1034,17 +1080,23 @@ __pkg__scope_bundle__.initPainterConfig = {
     // 轮廓色或图案
     "strokeStyle": 'black',
 
+    // 线的端点类型，（"butt"平直边缘、"round"半圆和"square"矩形）
+    "lineCap": "butt",
+
+    // 线的拐角连接方式，（"miter"连接处边缘延长相接、"bevel"对角线斜角和"round"圆）
+    "lineJoin": "miter",
+
     // 线条宽度(单位px，下同)
     "lineWidth": 1,
+
+    // 设置线条虚线，应该是一个数组[number,...]
+    "lineDash": [],
 
     // 文字水平对齐方式（"left"左对齐、"center"居中和"right"右对齐）
     "textAlign": 'left',
 
     // 文字垂直对齐方式（"middle"垂直居中、"top"上对齐和"bottom"下对齐）
     "textBaseline": 'middle',
-
-    // 设置线条虚线，应该是一个数组[number,...]
-    "lineDash": [],
 
     // 阴影的模糊系数，默认0，也就是无阴影
     "shadowBlur": 0,
@@ -1135,7 +1187,7 @@ __pkg__scope_bundle__.initRect = function (painter, x, y, width, height) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/canvas/arc
 /*****************************************************************/
-window.__pkg__bundleSrc__['142']=function(){
+window.__pkg__bundleSrc__['145']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     
@@ -1196,7 +1248,7 @@ __pkg__scope_bundle__.default= function (beginA, rotateA, cx, cy, r1, r2, doback
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/canvas/Gradient
 /*****************************************************************/
-window.__pkg__bundleSrc__['143']=function(){
+window.__pkg__bundleSrc__['146']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 线性渐变
@@ -1236,7 +1288,7 @@ __pkg__scope_bundle__.radialGradient = function (painter, cx, cy, r1, r2) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/keyCode
 /*****************************************************************/
-window.__pkg__bundleSrc__['169']=function(){
+window.__pkg__bundleSrc__['172']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 字典表
@@ -1441,7 +1493,7 @@ __pkg__scope_bundle__.default= function (callback) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/xhtml/mousePosition
 /*****************************************************************/
-window.__pkg__bundleSrc__['105']=function(){
+window.__pkg__bundleSrc__['108']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 获取鼠标相对特定元素左上角位置

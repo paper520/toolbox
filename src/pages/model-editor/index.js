@@ -9,7 +9,7 @@ import doResize from '../../tool/ResizeObserver';
 import webglRender from '../../tool/webgl/index';
 import Matrix4 from '../../tool/Matrix4/index';
 import viewHandler from '../../tool/viewHandler';
-import { downloadJSON } from '../../tool/help/download';
+import { downloadJSON } from '../../tool/download';
 import assemble from '../../tool/assemble';
 import getColorFactory from '../../tool/webgl/getColorFactory';
 

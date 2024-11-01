@@ -83,5 +83,20 @@ export default {
     // 截图工具
     "snipping-tool": function () {
         return import('./snipping-tool/index.js')
+    },
+
+    // 流程图工具
+    "drawio": function () {
+        return import('./drawio/index.js')
+    },
+
+    // 流程图工具
+    "code-example": function () {
+        return import('./code-example/index.js')
+    },
+
+    // 草稿纸
+    "draft": function () {
+        return import('./draft/index.js')
     }
 };

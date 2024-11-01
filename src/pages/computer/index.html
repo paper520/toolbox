@@ -3,8 +3,17 @@
         我的电脑
     </header>
     <nav>
+        <div class="item" ui-on:click="clickNav" tag="file" ui-bind:active="nav=='file'?'yes':'no'">
+            系统文件
+        </div>
+        <div class="item" ui-on:click="clickNav" tag="system" ui-bind:active="nav=='system'?'yes':'no'">
+            系统程序
+        </div>
         <div class="item" ui-on:click="clickNav" tag="application" ui-bind:active="nav=='application'?'yes':'no'">
             应用程序
+        </div>
+        <div class="item" ui-on:click="clickNav" tag="other" ui-bind:active="nav=='other'?'yes':'no'">
+            其它
         </div>
     </nav>
 </div>
@@ -16,7 +25,23 @@
             <button class="close" ui-on:click.stop="$closeView">关闭</button>
         </div>
     </header>
-    <div class="content application">
+
+    <!-- 系统文件 -->
+    <div class="content applist" ui-bind:active="nav=='file'?'yes':'no'">
+        <div tag="api" ui-on:dblclick="openDialog" ui-right-menu:app="dialog">
+            开发文档
+        </div>
+    </div>
+
+    <!-- 系统程序 -->
+    <div class="content applist" ui-bind:active="nav=='system'?'yes':'no'">
+        <div tag="debugger" ui-on:dblclick="openDialog" ui-right-menu:app="dialog">
+            调试工具
+        </div>
+    </div>
+
+    <!-- 应用程序 -->
+    <div class="content applist" ui-bind:active="nav=='application'?'yes':'no'">
         <div tag="model-editor" ui-on:dblclick="openApp" ui-right-menu:app>
             3D模型编辑器
         </div>
@@ -38,20 +63,8 @@
         <div tag="image-editor" ui-on:dblclick="openApp" ui-right-menu:app>
             图片编辑器
         </div>
-        <div tag="regexper-visualization" ui-on:dblclick="openApp" ui-right-menu:app>
-            正则表达式可视化
-        </div>
-        <div tag="api" ui-on:dblclick="openDialog" ui-right-menu:app="dialog">
-            开发文档
-        </div>
-        <div tag="snake-eating" ui-on:dblclick="openApp" ui-right-menu:app>
-            贪吃蛇
-        </div>
         <div tag="audio-editor" ui-on:dblclick="openApp" ui-right-menu:app>
             音频编辑器
-        </div>
-        <div tag="debugger" ui-on:dblclick="openDialog" ui-right-menu:app="dialog">
-            调试工具
         </div>
         <div tag="recorder-screen" ui-on:dblclick="openApp" ui-right-menu:app>
             录屏软件
@@ -59,14 +72,33 @@
         <div tag="snipping-tool" ui-on:dblclick="openApp" ui-right-menu:app>
             截图工具
         </div>
-        <div tag="echarts" ui-on:dblclick="openApp" ui-right-menu:app>
-            可视化图表
-        </div>
         <div tag="type-practice" ui-on:dblclick="openApp" ui-right-menu:app>
             金山打字通
         </div>
         <div tag="excel" ui-on:dblclick="openApp" ui-right-menu:app>
             Excel 表格
+        </div>
+        <!-- <div tag="drawio" ui-on:dblclick="openApp" ui-right-menu:app>
+            draw.io
+        </div> -->
+        <div tag="regexper-visualization" ui-on:dblclick="openApp" ui-right-menu:app>
+            正则表达式可视化
+        </div>
+        <div tag="snake-eating" ui-on:dblclick="openApp" ui-right-menu:app>
+            贪吃蛇
+        </div>
+        <!-- <div tag="draft" ui-on:dblclick="openApp" ui-right-menu:app>
+            草稿纸
+        </div> -->
+    </div>
+
+    <!-- 其它 -->
+    <div class="content applist" ui-bind:active="nav=='other'?'yes':'no'">
+        <div tag="code-example" ui-on:dblclick="openApp" ui-right-menu:app>
+            代码例子
+        </div>
+        <div tag="echarts" ui-on:dblclick="openApp" ui-right-menu:app>
+            可视化图表
         </div>
     </div>
 </div>

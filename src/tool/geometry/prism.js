@@ -1,5 +1,5 @@
 import getOption from "./option";
-import { mergeArrayTo } from "../help/Array";
+import { mergeArrayTo } from "../Array";
 import rotateLineFactory from "./tool/rotateLine";
 import prismHorizontal from "./tool/prism-horizontal";
 import prismVertical from "./tool/prism-vertical";

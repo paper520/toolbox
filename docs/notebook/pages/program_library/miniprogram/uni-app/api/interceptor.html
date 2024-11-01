@@ -1,0 +1,80 @@
+<header>
+    uni.addInterceptor(STRING, OBJECT)
+</header>
+<p>
+    添加拦截器
+</p>
+<h2>
+    STRING 参数说明
+</h2>
+<p>
+    需要拦截的api名称，如：uni.addInterceptor('request', OBJECT) ，将拦截 uni.request()
+</p>
+<p>
+    注意：
+</p>
+<ul>
+    <li>
+        仅支持异步接口，如：uni.setStorage(OBJECT)，暂不支持同步接口如：uni.setStorageSync(KEY,DATA)
+    </li>
+    <li>
+        uniCloud请求云端接口时（callFunction、uploadFile等）也会使用uni.request发送请求，请确保拦截器内不错误的处理此类请求
+    </li>
+</ul>
+<h2>
+    OBJECT 参数说明
+</h2>
+<table>
+    <thead>
+        <tr>
+            <th>参数名</th>
+            <th>类型</th>
+            <th>必填</th>
+            <th>默认值</th>
+            <th>说明</th>
+            <th>平台差异说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>invoke</td>
+            <td>Function</td>
+            <td>否</td>
+            <td></td>
+            <td>拦截前触发</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>returnValue</td>
+            <td>Function</td>
+            <td>否</td>
+            <td></td>
+            <td>方法调用后触发，处理返回值</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>success</td>
+            <td>Function</td>
+            <td>否</td>
+            <td></td>
+            <td>成功回调拦截</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>fail</td>
+            <td>Function</td>
+            <td>否</td>
+            <td></td>
+            <td>失败回调拦截</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>complete</td>
+            <td>Function</td>
+            <td>否</td>
+            <td></td>
+            <td>完成回调拦截</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

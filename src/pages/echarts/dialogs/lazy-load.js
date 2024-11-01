@@ -48,5 +48,30 @@ export default {
     // 水分子式H2O
     "h2o": function () {
         return import('./h2o/index.js')
+    },
+
+    // 可缩放折线图
+    "zoom-line": function () {
+        return import('./zoom-line/index.js')
+    },
+
+    // 从左到右树状图
+    "tree-layout-lr": function () {
+        return import('./tree-layout-lr/index.js')
+    },
+
+    // 桑基图左对齐布局
+    "sankey-nodeAlign-left": function () {
+        return import('./sankey-nodeAlign-left/index.js')
+    },
+
+    // 径向树状图
+    "tree-radial": function () {
+        return import('./tree-radial/index.js')
+    },
+
+     // 单波进度球
+     "single-wave": function () {
+        return import('./single-wave/index.js')
     }
 };

@@ -5,16 +5,16 @@
 window.__pkg__bundleSrc__['72']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('152');
+    __pkg__scope_args__=window.__pkg__getBundle('155');
 var template =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('153');
+__pkg__scope_args__=window.__pkg__getBundle('156');
 
-
-__pkg__scope_args__=window.__pkg__getBundle('154');
-var formatJSON =__pkg__scope_args__.default;
 
 __pkg__scope_args__=window.__pkg__getBundle('157');
+var formatJSON =__pkg__scope_args__.default;
+
+__pkg__scope_args__=window.__pkg__getBundle('160');
 var editorRender =__pkg__scope_args__.default;
 
 
@@ -59,7 +59,7 @@ __pkg__scope_bundle__.default= function (obj) {
 /*************************** [bundle] ****************************/
 // Original file:./src/pages/format-json/index.html
 /*****************************************************************/
-window.__pkg__bundleSrc__['152']=function(){
+window.__pkg__bundleSrc__['155']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_bundle__.default= [{"type":"tag","name":"root","attrs":{},"childNodes":[1,9,15]},{"type":"tag","name":"header","attrs":{"ui-dragdrop:desktop":""},"childNodes":[2,4]},{"type":"tag","name":"h2","attrs":{},"childNodes":[3]},{"type":"text","content":"格式化JSON字符串","childNodes":[]},{"type":"tag","name":"div","attrs":{"class":"win-btns"},"childNodes":[5,7]},{"type":"tag","name":"button","attrs":{"class":"min","ui-on:click.stop":"$minView"},"childNodes":[6]},{"type":"text","content":"最小化","childNodes":[]},{"type":"tag","name":"button","attrs":{"class":"close","ui-on:click.stop":"$closeView"},"childNodes":[8]},{"type":"text","content":"关闭","childNodes":[]},{"type":"tag","name":"div","attrs":{},"childNodes":[10,14]},{"type":"tag","name":"h2","attrs":{},"childNodes":[11,12]},{"type":"text","content":"源代码","childNodes":[]},{"type":"tag","name":"button","attrs":{"class":"run","ui-on:click":"formatJSON"},"childNodes":[13]},{"type":"text","content":"运行","childNodes":[]},{"type":"tag","name":"div","attrs":{"ref":"source"},"childNodes":[]},{"type":"tag","name":"div","attrs":{},"childNodes":[16,18]},{"type":"tag","name":"h2","attrs":{},"childNodes":[17]},{"type":"text","content":"运行结果","childNodes":[]},{"type":"tag","name":"div","attrs":{"ref":"target"},"childNodes":[]}]
@@ -70,7 +70,7 @@ window.__pkg__bundleSrc__['152']=function(){
 /*************************** [bundle] ****************************/
 // Original file:./src/pages/format-json/index.scss
 /*****************************************************************/
-window.__pkg__bundleSrc__['153']=function(){
+window.__pkg__bundleSrc__['156']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     var styleElement = document.createElement('style');
@@ -84,16 +84,16 @@ styleElement.setAttribute('type', 'text/css');head.appendChild(styleElement);
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/json/index
 /*****************************************************************/
-window.__pkg__bundleSrc__['154']=function(){
+window.__pkg__bundleSrc__['157']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_args__=window.__pkg__getBundle('31');
 var isString =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('155');
+__pkg__scope_args__=window.__pkg__getBundle('158');
 var analyseWord =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('156');
+__pkg__scope_args__=window.__pkg__getBundle('159');
 var toValue =__pkg__scope_args__.default;
 
 
@@ -174,10 +174,10 @@ __pkg__scope_bundle__.default= function (express) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/json/analyseWord
 /*****************************************************************/
-window.__pkg__bundleSrc__['155']=function(){
+window.__pkg__bundleSrc__['158']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('133');
+    __pkg__scope_args__=window.__pkg__getBundle('136');
 var ReadString =__pkg__scope_args__.default;
 
 
@@ -270,7 +270,7 @@ __pkg__scope_bundle__.default= function (express) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/ReadString
 /*****************************************************************/
-window.__pkg__bundleSrc__['133']=function(){
+window.__pkg__bundleSrc__['136']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_bundle__.default= function (express) {
@@ -301,7 +301,7 @@ window.__pkg__bundleSrc__['133']=function(){
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/json/toValue
 /*****************************************************************/
-window.__pkg__bundleSrc__['156']=function(){
+window.__pkg__bundleSrc__['159']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     var toValue = function (word) {
@@ -371,11 +371,11 @@ __pkg__scope_bundle__.default= function (wordArray) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/editor/index
 /*****************************************************************/
-window.__pkg__bundleSrc__['157']=function(){
+window.__pkg__bundleSrc__['160']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     
-__pkg__scope_args__=window.__pkg__getBundle('158');
+__pkg__scope_args__=window.__pkg__getBundle('161');
 var trigger =__pkg__scope_args__.default;
 
 __pkg__scope_args__=window.__pkg__getBundle('62');
@@ -394,7 +394,7 @@ var isFunction =__pkg__scope_args__.default;
 
 // 核心方法和工具方法
 
-__pkg__scope_args__=window.__pkg__getBundle('159');
+__pkg__scope_args__=window.__pkg__getBundle('162');
 var textWidth=__pkg__scope_args__.textWidth;
 var bestLeftNum=__pkg__scope_args__.bestLeftNum;
 var calcCanvasXY=__pkg__scope_args__.calcCanvasXY;
@@ -402,11 +402,11 @@ var selectIsNotBlank=__pkg__scope_args__.selectIsNotBlank;
 var toTemplate=__pkg__scope_args__.toTemplate;
 
 
-__pkg__scope_args__=window.__pkg__getBundle('160');
+__pkg__scope_args__=window.__pkg__getBundle('163');
 var initDom=__pkg__scope_args__.initDom;
 var initView=__pkg__scope_args__.initView;
 
-__pkg__scope_args__=window.__pkg__getBundle('165');
+__pkg__scope_args__=window.__pkg__getBundle('168');
 var updateView=__pkg__scope_args__.updateView;
 var updateSelectView=__pkg__scope_args__.updateSelectView;
 var updateCursorPosition=__pkg__scope_args__.updateCursorPosition;
@@ -414,20 +414,20 @@ var updateCanvasSize=__pkg__scope_args__.updateCanvasSize;
 var cancelSelect=__pkg__scope_args__.cancelSelect;
 var deleteSelect=__pkg__scope_args__.deleteSelect;
 
-__pkg__scope_args__=window.__pkg__getBundle('168');
+__pkg__scope_args__=window.__pkg__getBundle('171');
 var bindEvent =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('170');
+__pkg__scope_args__=window.__pkg__getBundle('173');
 var diff =__pkg__scope_args__.default;
 
 
-__pkg__scope_args__=window.__pkg__getBundle('171');
+__pkg__scope_args__=window.__pkg__getBundle('174');
 var filterText =__pkg__scope_args__.default;
 
 
 // 内置着色器方法
 
-__pkg__scope_args__=window.__pkg__getBundle('172');
+__pkg__scope_args__=window.__pkg__getBundle('175');
 var innerShader =__pkg__scope_args__.default;
 
 
@@ -634,7 +634,7 @@ __pkg__scope_bundle__.default= editor;
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/xhtml/trigger
 /*****************************************************************/
-window.__pkg__bundleSrc__['158']=function(){
+window.__pkg__bundleSrc__['161']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
       // 触发事件
@@ -703,7 +703,7 @@ __pkg__scope_bundle__.default= function (text, callback, errorback) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/editor/edit-view/tool
 /*****************************************************************/
-window.__pkg__bundleSrc__['159']=function(){
+window.__pkg__bundleSrc__['162']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     
@@ -814,10 +814,10 @@ __pkg__scope_bundle__.getInputMessage=function(editor) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/editor/edit-view/init
 /*****************************************************************/
-window.__pkg__bundleSrc__['160']=function(){
+window.__pkg__bundleSrc__['163']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('161');
+    __pkg__scope_args__=window.__pkg__getBundle('164');
 var setStyle =__pkg__scope_args__.default;
 
 __pkg__scope_args__=window.__pkg__getBundle('22');
@@ -826,13 +826,13 @@ var bind =__pkg__scope_args__.default;
 __pkg__scope_args__=window.__pkg__getBundle('48');
 var appendTo =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('162');
+__pkg__scope_args__=window.__pkg__getBundle('165');
 var stopPropagation =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('163');
+__pkg__scope_args__=window.__pkg__getBundle('166');
 var preventDefault =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('164');
+__pkg__scope_args__=window.__pkg__getBundle('167');
 var attr =__pkg__scope_args__.default;
 
 
@@ -961,7 +961,7 @@ __pkg__scope_bundle__.initView=function() {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/xhtml/setStyle
 /*****************************************************************/
-window.__pkg__bundleSrc__['161']=function(){
+window.__pkg__bundleSrc__['164']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 修改样式
@@ -977,7 +977,7 @@ __pkg__scope_bundle__.default= function (el, styles) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/xhtml/stopPropagation
 /*****************************************************************/
-window.__pkg__bundleSrc__['162']=function(){
+window.__pkg__bundleSrc__['165']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 阻止冒泡
@@ -996,7 +996,7 @@ __pkg__scope_bundle__.default= function (event) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/xhtml/preventDefault
 /*****************************************************************/
-window.__pkg__bundleSrc__['163']=function(){
+window.__pkg__bundleSrc__['166']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 阻止默认事件
@@ -1015,7 +1015,7 @@ __pkg__scope_bundle__.default= function (event) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/xhtml/attr
 /*****************************************************************/
-window.__pkg__bundleSrc__['164']=function(){
+window.__pkg__bundleSrc__['167']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 修改属性
@@ -1031,19 +1031,19 @@ __pkg__scope_bundle__.default= function (el, attrs) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/editor/edit-view/update
 /*****************************************************************/
-window.__pkg__bundleSrc__['165']=function(){
+window.__pkg__bundleSrc__['168']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('161');
+    __pkg__scope_args__=window.__pkg__getBundle('164');
 var setStyle =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('164');
+__pkg__scope_args__=window.__pkg__getBundle('167');
 var attr =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('166');
+__pkg__scope_args__=window.__pkg__getBundle('169');
 var prependTo =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('167');
+__pkg__scope_args__=window.__pkg__getBundle('170');
 var after =__pkg__scope_args__.default;
 
 __pkg__scope_args__=window.__pkg__getBundle('33');
@@ -1262,7 +1262,7 @@ __pkg__scope_bundle__.deleteSelect=function() {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/xhtml/prependTo
 /*****************************************************************/
-window.__pkg__bundleSrc__['166']=function(){
+window.__pkg__bundleSrc__['169']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_args__=window.__pkg__getBundle('49');
@@ -1285,7 +1285,7 @@ __pkg__scope_bundle__.default= function (el, template) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/xhtml/after
 /*****************************************************************/
-window.__pkg__bundleSrc__['167']=function(){
+window.__pkg__bundleSrc__['170']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_args__=window.__pkg__getBundle('49');
@@ -1309,10 +1309,10 @@ __pkg__scope_bundle__.default= function (el, template) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/editor/edit-view/bind
 /*****************************************************************/
-window.__pkg__bundleSrc__['168']=function(){
+window.__pkg__bundleSrc__['171']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('169');
+    __pkg__scope_args__=window.__pkg__getBundle('172');
 var getKeyString=__pkg__scope_args__.getKeyString;
 
 __pkg__scope_args__=window.__pkg__getBundle('32');
@@ -1321,19 +1321,19 @@ var isFunction =__pkg__scope_args__.default;
 __pkg__scope_args__=window.__pkg__getBundle('22');
 var bind =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('105');
+__pkg__scope_args__=window.__pkg__getBundle('108');
 var mousePosition =__pkg__scope_args__.default;
 
 __pkg__scope_args__=window.__pkg__getBundle('62');
 var copy =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('162');
+__pkg__scope_args__=window.__pkg__getBundle('165');
 var stopPropagation =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('163');
+__pkg__scope_args__=window.__pkg__getBundle('166');
 var preventDefault =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('159');
+__pkg__scope_args__=window.__pkg__getBundle('162');
 var getInputMessage=__pkg__scope_args__.getInputMessage;
 
 
@@ -1890,7 +1890,7 @@ __pkg__scope_bundle__.default= function () {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/keyCode
 /*****************************************************************/
-window.__pkg__bundleSrc__['169']=function(){
+window.__pkg__bundleSrc__['172']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 字典表
@@ -2095,7 +2095,7 @@ __pkg__scope_bundle__.default= function (callback) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/xhtml/mousePosition
 /*****************************************************************/
-window.__pkg__bundleSrc__['105']=function(){
+window.__pkg__bundleSrc__['108']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // 获取鼠标相对特定元素左上角位置
@@ -2124,7 +2124,7 @@ __pkg__scope_bundle__.default= function (el, event) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/editor/edit-view/diff
 /*****************************************************************/
-window.__pkg__bundleSrc__['170']=function(){
+window.__pkg__bundleSrc__['173']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     
@@ -2206,7 +2206,7 @@ __pkg__scope_bundle__.default= function (newFormatData) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/editor/edit-view/filter
 /*****************************************************************/
-window.__pkg__bundleSrc__['171']=function(){
+window.__pkg__bundleSrc__['174']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     
@@ -2229,7 +2229,7 @@ __pkg__scope_bundle__.default= function (oralStr) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/shader/index
 /*****************************************************************/
-window.__pkg__bundleSrc__['172']=function(){
+window.__pkg__bundleSrc__['175']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     /**
@@ -2280,13 +2280,13 @@ var initConfig = function (init, data) {
     return init;
 };
 
-__pkg__scope_args__=window.__pkg__getBundle('173');
+__pkg__scope_args__=window.__pkg__getBundle('176');
 var _inner_HTML_shader =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('174');
+__pkg__scope_args__=window.__pkg__getBundle('177');
 var _inner_CSS_shader =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('175');
+__pkg__scope_args__=window.__pkg__getBundle('178');
 var _inner_ES_shader =__pkg__scope_args__.default;
 
 
@@ -2359,13 +2359,13 @@ __pkg__scope_bundle__.default= function (lang, colors) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/shader/html
 /*****************************************************************/
-window.__pkg__bundleSrc__['173']=function(){
+window.__pkg__bundleSrc__['176']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
-    __pkg__scope_args__=window.__pkg__getBundle('174');
+    __pkg__scope_args__=window.__pkg__getBundle('177');
 var _inner_CSS_shader =__pkg__scope_args__.default;
 
-__pkg__scope_args__=window.__pkg__getBundle('175');
+__pkg__scope_args__=window.__pkg__getBundle('178');
 var _inner_ES_shader =__pkg__scope_args__.default;
 
 
@@ -2639,7 +2639,7 @@ __pkg__scope_bundle__.default= function (textString, colors) {
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/shader/css
 /*****************************************************************/
-window.__pkg__bundleSrc__['174']=function(){
+window.__pkg__bundleSrc__['177']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     __pkg__scope_bundle__.default= function (textString, colors) {
@@ -2766,7 +2766,7 @@ window.__pkg__bundleSrc__['174']=function(){
 /*************************** [bundle] ****************************/
 // Original file:./src/tool/shader/javascript
 /*****************************************************************/
-window.__pkg__bundleSrc__['175']=function(){
+window.__pkg__bundleSrc__['178']=function(){
     var __pkg__scope_bundle__={};
     var __pkg__scope_args__;
     // JS关键字

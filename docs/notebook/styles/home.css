@@ -173,11 +173,28 @@ nav>a.active {
 .view>.containter>.content {
     width: 600px;
     background-color: #ffffff;
-    height: 500px;
     margin-left: 45px;
     display: inline-block;
     font-size: 14px;
     position: relative;
+    padding: 70px 50px 30px 50px;
+    color: #223036;
+}
+
+.view>.containter>.content>.title {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.view>.containter>.content>.author {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.view>.containter>.content>.line {
+    text-indent: 2em;
+    line-height: 1.8em;
 }
 
 .view>.containter>.right {

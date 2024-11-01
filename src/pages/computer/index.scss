@@ -81,7 +81,11 @@
                     height: calc(100% - 60px);
                     overflow: auto;
 
-                    &.application {
+                    &[active="no"] {
+                        display: none;
+                    }
+
+                    &.applist {
                         &>div {
 
                             width: 70px;

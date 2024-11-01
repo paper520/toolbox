@@ -1,5 +1,5 @@
 import getOption from "./option";
-import { mergeArrayTo } from "../help/Array";
+import { mergeArrayTo } from "../Array";
 import sphereFragment from "./tool/sphere-fragment";
 import { splitNum } from "./tool/circle";
 

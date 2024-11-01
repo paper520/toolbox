@@ -90,6 +90,21 @@ window.__pkg__bundleSrc__['37']=function(){
     // 截图工具
     "snipping-tool": function () {
         return window.__pkg__getLazyBundle('./dist/bundle30.js','86')
+    },
+
+    // 流程图工具
+    "drawio": function () {
+        return window.__pkg__getLazyBundle('./dist/bundle31.js','87')
+    },
+
+    // 流程图工具
+    "code-example": function () {
+        return window.__pkg__getLazyBundle('./dist/bundle32.js','88')
+    },
+
+    // 草稿纸
+    "draft": function () {
+        return window.__pkg__getLazyBundle('./dist/bundle33.js','89')
     }
 };
 

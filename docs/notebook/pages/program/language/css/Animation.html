@@ -5,13 +5,13 @@
     首先，我们需要定义一个动画：
 </p>
 <pre tag="css">
-@keyframes move_right {
-    from {
-        left: 0px;
+@keyframes rotateLoop {
+    0% {
+        transform: rotate(0deg);
     }
 
-    to {
-        left: 200px;
+    100% {
+        transform: rotate(360deg);
     }
 }
 </pre>
@@ -19,5 +19,5 @@
     然后，使用即可，就像下面这样：
 </p>
 <pre tag="css">
-    animation: move_right 5s infinite;
+    animation: rotateLoop 5s infinite;
 </pre>

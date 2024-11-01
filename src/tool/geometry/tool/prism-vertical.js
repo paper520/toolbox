@@ -1,5 +1,5 @@
 import rotate from '../../transform/rotate';
-import { mergeArrayTo } from '../../help/Array';
+import { mergeArrayTo } from '../../Array';
 
 // 棱柱垂直部分
 
